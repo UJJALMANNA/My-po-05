@@ -493,7 +493,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 /* Adding animation to My Let's Groww Part Hero*/
 .hero__name {
-    font-size: 60px;
+    font-size: 52px;
     font-weight: 800;
     color: white;
     display: flex;
