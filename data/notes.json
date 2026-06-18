@@ -1,0 +1,20 @@
+[
+  {
+    "date": "Jun 2026",
+    "title": "Starting M.Tech at IIT Bhilai — first impressions of Control & Instrumentation",
+    "summary": "Notes on moving from a pure CS background into a systems-and-signals heavy curriculum, and what carried over from GATE preparation.",
+    "url": "#"
+  },
+  {
+    "date": "Mar 2026",
+    "title": "What changed between my 2025 and 2026 GATE attempts",
+    "summary": "A breakdown of the specific changes in preparation strategy that improved the second attempt's outcome.",
+    "url": "#"
+  },
+  {
+    "date": "Jan 2026",
+    "title": "Why feedback loops in control systems feel familiar to programmers",
+    "summary": "Drawing the parallel between control-system feedback and patterns like retry logic and reconciliation loops in software.",
+    "url": "#"
+  }
+]

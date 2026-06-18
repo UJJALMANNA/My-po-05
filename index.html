@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujjal Manna — Control &amp; Instrumentation, IIT Bhilai</title>
+<meta name="description" content="Ujjal Manna — BTech BBIT Kolkata, GATE CS qualified 2025 &amp; 2026, MTech Control &amp; Instrumentation at IIT Bhilai. GATE mentorship, tech notes, and contact.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ NOISE / GRAIN OVERLAY ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__mark">UM<span class="nav__mark-dot">.</span></a>
+  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav__links" id="navLinks">
+    <a href="#about"><span class="nav__num">01</span>About</a>
+    <a href="#path"><span class="nav__num">02</span>Path</a>
+    <a href="#gate"><span class="nav__num">03</span>GATE Desk</a>
+    <a href="#news"><span class="nav__num">04</span>Signal Feed</a>
+    <a href="#contact" class="nav__cta"><span class="nav__num">05</span>Query</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">// control &amp; instrumentation &mdash; iit bhilai</p>
+    <h1 class="hero__name">Ujjal<br>Manna</h1>
+    <p class="hero__role">Engineer in transit between disciplines — <br class="hero__br">circuits, control loops, and the GATE that connects them.</p>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <span class="stat__num">8.08</span>
+        <span class="stat__label">CGPA · BTech</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">2×</span>
+        <span class="stat__label">GATE CS Qualified<br>2025 &amp; 2026</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">C&amp;I</span>
+        <span class="stat__label">MTech · IIT Bhilai</span>
+      </div>
+    </div>
+
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn--solid">Send a query</a>
+      <a href="#gate" class="btn btn--ghost">GATE guidance →</a>
+    </div>
+  </div>
+
+  <!-- Signal-flow diagram: the signature element -->
+  <div class="hero__diagram" aria-label="Academic signal flow diagram from BTech to MTech">
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+    <svg viewBox="0 0 480 620" xmlns="http://www.w3.org/2000/svg" class="flow-svg">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--signal)"/>
+        </marker>
+      </defs>
+
+      <!-- vertical signal path -->
+      <line x1="240" y1="58" x2="240" y2="150" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="240" y1="208" x2="240" y2="300" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="240" y1="358" x2="240" y2="450" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="240" y1="508" x2="240" y2="560" stroke="var(--amber)" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- feedback loop (GATE retry) -->
+      <path d="M 300 250 C 400 250, 400 100, 300 30" fill="none" stroke="var(--amber)" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#arrow)"/>
+      <text x="408" y="140" class="flow-feedback-label" transform="rotate(90 408 140)">feedback · GATE 2025 → 2026</text>
+
+      <!-- Block 1: BTech -->
+      <g class="flow-block">
+        <rect x="120" y="0" width="240" height="58" rx="3"/>
+        <text x="240" y="24" class="flow-title">BBIT, Kolkata</text>
+        <text x="240" y="42" class="flow-sub">B.Tech · CGPA 8.08</text>
+      </g>
+
+      <!-- Block 2: GATE 2025 -->
+      <g class="flow-block flow-block--accent">
+        <rect x="100" y="150" width="280" height="58" rx="3"/>
+        <text x="240" y="174" class="flow-title">GATE CS — 2025</text>
+        <text x="240" y="192" class="flow-sub">Qualified</text>
+      </g>
+
+      <!-- Block 3: GATE 2026 -->
+      <g class="flow-block flow-block--accent">
+        <rect x="100" y="300" width="280" height="58" rx="3"/>
+        <text x="240" y="324" class="flow-title">GATE CS — 2026</text>
+        <text x="240" y="342" class="flow-sub">Qualified</text>
+      </g>
+
+      <!-- Block 4: IIT Bhilai -->
+      <g class="flow-block flow-block--solid">
+        <rect x="80" y="450" width="320" height="58" rx="3"/>
+        <text x="240" y="474" class="flow-title">IIT Bhilai</text>
+        <text x="240" y="492" class="flow-sub">M.Tech · Control &amp; Instrumentation</text>
+      </g>
+
+      <!-- Output node -->
+      <g class="flow-output">
+        <circle cx="240" cy="588" r="22"/>
+        <text x="240" y="593" class="flow-output-label">y(t)</text>
+      </g>
+      <text x="240" y="618" class="flow-caption">current state</text>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ ABOUT ============ -->
+<section class="section about" id="about">
+  <div class="section__head">
+    <span class="section__num">01</span>
+    <h2>About</h2>
+  </div>
+
+  <div class="about__grid">
+    <div class="about__text">
+      <p class="about__lead">I'm Ujjal Manna — currently pursuing my M.Tech in Control &amp; Instrumentation at IIT Bhilai, after two consecutive GATE Computer Science qualifications brought me here from my B.Tech at BBIT, Kolkata.</p>
+      <p>My undergraduate years were spent building a foundation in computer science fundamentals, which I carried into GATE preparation — qualifying in both the 2025 and 2026 attempts before choosing to specialise further at IIT Bhilai. Control &amp; Instrumentation sits at an interesting intersection: feedback loops, signal processing, and systems thinking, applied with the same rigor I'd bring to any algorithm.</p>
+      <p>Outside of coursework, I spend time helping juniors navigate their own GATE preparation, and I track what's moving in tech — both to stay sharp and because explaining a concept well is usually the fastest way to actually understand it.</p>
+    </div>
+
+    <div class="about__card">
+      <h3 class="about__card-title">Academic record</h3>
+      <dl class="record">
+        <div class="record__row">
+          <dt>Institute</dt><dd>IIT Bhilai</dd>
+        </div>
+        <div class="record__row">
+          <dt>Programme</dt><dd>M.Tech, Control &amp; Instrumentation</dd>
+        </div>
+        <div class="record__row">
+          <dt>Undergraduate</dt><dd>B.Tech, BBIT Kolkata</dd>
+        </div>
+        <div class="record__row">
+          <dt>CGPA</dt><dd>8.08</dd>
+        </div>
+        <div class="record__row">
+          <dt>GATE CS</dt><dd>Qualified — 2025, 2026</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PATH (timeline) ============ -->
+<section class="section path" id="path">
+  <div class="section__head">
+    <span class="section__num">02</span>
+    <h2>The Path So Far</h2>
+  </div>
+
+  <ol class="timeline">
+    <li class="timeline__item">
+      <span class="timeline__year">B.Tech</span>
+      <div class="timeline__body">
+        <h3>BBIT, Kolkata</h3>
+        <p>Completed B.Tech with a CGPA of 8.08, building the fundamentals that carried into GATE preparation.</p>
+      </div>
+    </li>
+    <li class="timeline__item">
+      <span class="timeline__year">2025</span>
+      <div class="timeline__body">
+        <h3>GATE CS — Qualified</h3>
+        <p>First attempt at GATE Computer Science, qualified — the first signal that an IIT was within reach.</p>
+      </div>
+    </li>
+    <li class="timeline__item">
+      <span class="timeline__year">2026</span>
+      <div class="timeline__body">
+        <h3>GATE CS — Qualified again</h3>
+        <p>Re-attempted and qualified GATE CS a second time, this time converting it into an admission at IIT Bhilai.</p>
+      </div>
+    </li>
+    <li class="timeline__item timeline__item--current">
+      <span class="timeline__year">Now</span>
+      <div class="timeline__body">
+        <h3>M.Tech, Control &amp; Instrumentation — IIT Bhilai</h3>
+        <p>Currently pursuing my master's, working at the intersection of systems, signals, and software.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ GATE DESK ============ -->
+<section class="section gate" id="gate">
+  <div class="section__head">
+    <span class="section__num">03</span>
+    <h2>GATE Desk</h2>
+    <p class="section__sub">Notes for juniors preparing for GATE CS — written from the other side of two attempts.</p>
+  </div>
+
+  <div class="gate__grid" id="gateGrid">
+    <!-- populated by js/gate.js, static fallback below -->
+  </div>
+
+  <div class="gate__cta">
+    <p>Have a specific doubt about strategy, subjects, or the exam itself?</p>
+    <a href="#contact" class="btn btn--ghost">Ask me directly →</a>
+  </div>
+</section>
+
+<!-- ============ SIGNAL FEED (tech news) ============ -->
+<section class="section news" id="news">
+  <div class="section__head">
+    <span class="section__num">04</span>
+    <h2>Signal Feed</h2>
+    <p class="section__sub">Live engineering &amp; CS discussion pulled from Hacker News and Dev.to, plus notes I post myself.</p>
+  </div>
+
+  <div class="news__tabs" role="tablist">
+    <button class="news__tab is-active" data-source="mine" role="tab" aria-selected="true">My Notes</button>
+    <button class="news__tab" data-source="hn" role="tab" aria-selected="false">Hacker News</button>
+    <button class="news__tab" data-source="devto" role="tab" aria-selected="false">Dev.to</button>
+  </div>
+
+  <div class="news__list" id="newsList">
+    <div class="news__loading" id="newsLoading">Tuning in…</div>
+  </div>
+</section>
+
+<!-- ============ QUERY / CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="section__head">
+    <span class="section__num">05</span>
+    <h2>Send a Query</h2>
+    <p class="section__sub">Questions on GATE prep, control systems, or anything else — this goes straight to me.</p>
+  </div>
+
+  <div class="contact__grid">
+    <form class="form" id="queryForm">
+      <div class="form__row">
+        <label for="fname">Name</label>
+        <input type="text" id="fname" name="name" required autocomplete="name">
+      </div>
+      <div class="form__row">
+        <label for="femail">Email</label>
+        <input type="email" id="femail" name="email" required autocomplete="email">
+      </div>
+      <div class="form__row">
+        <label for="fsubject">Subject</label>
+        <select id="fsubject" name="subject">
+          <option value="GATE Guidance">GATE Guidance</option>
+          <option value="Control & Instrumentation">Control &amp; Instrumentation</option>
+          <option value="General">General</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form__row">
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn--solid" id="formSubmit">Send message</button>
+      <p class="form__status" id="formStatus" role="status"></p>
+    </form>
+
+    <div class="contact__info">
+      <h3>Direct</h3>
+      <p>If you'd rather reach out elsewhere:</p>
+      <ul class="contact__links" id="contactLinks">
+        <li><a href="mailto:youremail@example.com">Email</a></li>
+        <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+      <p class="contact__note">Messages are stored securely and I read every one — usually within a couple of days.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>Ujjal Manna · M.Tech Control &amp; Instrumentation, IIT Bhilai</p>
+  <p class="footer__small">Built &amp; maintained on GitHub · <span id="year"></span></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/news.js"></script>
+<script src="js/gate.js"></script>
+<script type="module" src="js/scene3d.js"></script>
+<script src="js/reveal.js"></script>
+</body>
+</html>
