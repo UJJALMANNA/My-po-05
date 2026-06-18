@@ -145,7 +145,7 @@ button { font-family: inherit; cursor: pointer; }
    HERO
    =========================================================== */
 .hero {
-  min-height: 100vh;
+  min-height: 95vh;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   align-items: center;
@@ -204,7 +204,7 @@ button { font-family: inherit; cursor: pointer; }
 .hero__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 
 .btn {
-  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  font-family: var(--font-body); font-weight: 695; font-size: 0.95rem;
   padding: 0.85em 1.8em; border-radius: 999px; border: 1px solid transparent;
   display: inline-flex; align-items: center; gap: 0.5em;
   transition: all 0.25s ease;
