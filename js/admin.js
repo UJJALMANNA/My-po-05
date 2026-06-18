@@ -28,9 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     !SUPABASE_CONFIG.url.includes('YOUR_SUPABASE');
 
   function functionUrl(action) {
-    // Supabase Edge Functions live at: https://<project>.functions.supabase.co/<name>
-    const base = SUPABASE_CONFIG.url.replace('.supabase.co', '.functions.supabase.co');
-    return `${base}/moderate-post`;
+    // Supabase Edge Functions live at: https://<project>.supabase.co/functions/v1/<name>
+    return `${SUPABASE_CONFIG.url}/functions/v1/moderate-post`;
   }
 
   async function callModerate(action, payload = {}) {
