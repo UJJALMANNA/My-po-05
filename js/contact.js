@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const { error } = await supabaseClient
-        .from('messages')
+        .from('contact_queries')
         .insert([{ name, email, subject, message }]);
 
       if (error) throw error;
