@@ -469,10 +469,8 @@ button { font-family: inherit; cursor: pointer; }
 .down-arrow {
     width: 100%;
     text-align: center;
-    font-size: 38px;
-    color: white !important;
-    fill: white !important;      /* Changes solid SVG color */
-    stroke: white !important;    /* Changes outlined SVG color */
+    font-size: 35px;
+    color: white; /* Changed from #a678ff */
     margin: 18px 0;
     animation: arrowMove 1.5s infinite;
     text-shadow: 0 0 15px #a678ff;
