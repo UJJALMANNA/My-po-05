@@ -12,50 +12,7 @@
 
 <link rel="stylesheet" href="css/style.css">
 </head>
-  <script>
-
-const text = "Let's\nGroww";
-
-const typing = document.getElementById("typing");
-
-let i = 0;
-
-
-function typingEffect(){
-
-    if(i < text.length){
-
-        if(text[i] === "\n"){
-            typing.innerHTML += "<br>";
-        }
-        else{
-            typing.innerHTML += text[i];
-        }
-
-        i++;
-
-        setTimeout(typingEffect,150);
-
-    }
-
-    else{
-
-        setTimeout(()=>{
-
-            typing.innerHTML="";
-            i=0;
-            typingEffect();
-
-        },2000);
-
-    }
-
-}
-
-
-typingEffect();
-
-</script>
+  
 <body>
 
 <!-- ============ NOISE / GRAIN OVERLAY ============ -->
@@ -364,5 +321,49 @@ typingEffect();
 <script src="js/gate.js"></script>
 <script type="module" src="js/scene3d.js"></script>
 <script src="js/reveal.js"></script>
+  <script>
+
+const text = "Let's\nGroww";
+
+const typing = document.getElementById("typing");
+
+let i = 0;
+
+
+function typingEffect(){
+
+    if(i < text.length){
+
+        if(text[i] === "\n"){
+            typing.innerHTML += "<br>";
+        }
+        else{
+            typing.innerHTML += text[i];
+        }
+
+        i++;
+
+        setTimeout(typingEffect,150);
+
+    }
+
+    else{
+
+        setTimeout(()=>{
+
+            typing.innerHTML="";
+            i=0;
+            typingEffect();
+
+        },2000);
+
+    }
+
+}
+
+
+typingEffect();
+
+</script>
 </body>
 </html>
