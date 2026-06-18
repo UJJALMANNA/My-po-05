@@ -3,12 +3,12 @@
    =========================================================== */
 :root {
   /* Base */
-  --bg:          #0E0B1A;
-  --bg-soft:     #15112A;
-  --surface:     #1A1530;
+  --bg:          #050308;
+  --bg-soft:     #0A0712;
+  --surface:     #0F0B1C;
   --ink:         #F2EFFA;
-  --ink-dim:     #A8A3C2;
-  --line:        #2E2850;
+  --ink-dim:     #918CAD;
+  --line:        #211B3A;
 
   /* Gradient palette */
   --c-indigo:    #8B7CF6;
@@ -98,7 +98,7 @@ button { font-family: inherit; cursor: pointer; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--space-2) var(--space-4);
-  background: rgba(14, 11, 26, 0.75);
+  background: rgba(5, 3, 8, 0.8);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
