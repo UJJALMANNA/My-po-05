@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Moderate Posts</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .admin-wrap { max-width: 860px; margin: 0 auto; padding: calc(var(--space-6) + 1rem) var(--space-4) var(--space-6); }
+
+  .lock-screen {
+    max-width: 380px; margin: 18vh auto; text-align: center;
+  }
+  .lock-screen input {
+    width: 100%; background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+    font-family: var(--font-body); font-size: 1rem; padding: 0.8em 1em; border-radius: var(--radius-sm);
+    margin: var(--space-3) 0;
+  }
+  .lock-screen .btn { width: 100%; justify-content: center; border: none; }
+  .lock-error { color: #E74C3C; font-size: 0.88rem; min-height: 1.2em; }
+
+  .admin-post {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--space-3); margin-bottom: var(--space-3); box-shadow: var(--shadow-sm);
+  }
+  .admin-post__status {
+    display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; padding: 0.25em 0.8em; border-radius: 999px;
+    margin-bottom: 0.6em;
+  }
+  .admin-post__status.pending { background: rgba(255,159,90,0.15); color: var(--c-orange); }
+  .admin-post__status.approved { background: rgba(79,209,197,0.15); color: var(--c-cyan); }
+  .admin-post__title { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.2em; }
+  .admin-post__meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-dim); margin-bottom: 0.8em; }
+  .admin-post__body { color: var(--ink-dim); white-space: pre-wrap; line-height: 1.6; margin-bottom: var(--space-2); max-height: 200px; overflow-y: auto; }
+  .admin-post__actions { display: flex; gap: 0.6em; flex-wrap: wrap; }
+
+  .btn--approve { background: linear-gradient(120deg, #4FD1C5, #16A085); color: #fff; border: none; }
+  .btn--delete { background: linear-gradient(120deg, #E74C3C, #C0392B); color: #fff; border: none; }
+  .btn--small { padding: 0.5em 1.2em; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav__mark">UM<span class="nav__mark-dot">.</span></a>
+</nav>
+
+<!-- LOCK SCREEN -->
+<div class="lock-screen" id="lockScreen">
+  <h2>Admin Access</h2>
+  <p style="color:var(--ink-dim)">Enter your password to moderate posts.</p>
+  <input type="password" id="adminPassword" placeholder="Password" autocomplete="off">
+  <button class="btn btn--solid" id="unlockBtn">Unlock</button>
+  <p class="lock-error" id="lockError"></p>
+</div>
+
+<!-- ADMIN PANEL (hidden until unlocked) -->
+<main class="admin-wrap" id="adminPanel" style="display:none;">
+  <div class="section__head">
+    <h2>Moderate Posts</h2>
+    <p class="section__sub">Approve pending submissions or delete anything inappropriate. Deletions are permanent.</p>
+  </div>
+  <div id="adminPostsList">
+    <p class="news__loading">Loading…</p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
