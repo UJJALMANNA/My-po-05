@@ -493,25 +493,53 @@ button { font-family: inherit; cursor: pointer; }
 }
 /* Adding animation to My Let's Groww Part Hero*/
 .hero__name {
+    font-size: 90px;
+    font-weight: 800;
+    animation: revealText 1.5s ease forwards,
+               floating 3s ease-in-out infinite;
+    opacity: 0;
     text-shadow:
-    0 0 10px #a678ff,
-    0 0 25px #a678ff,
-    0 0 50px #7b4dff;
-
-    animation:
-    titleAnimation 1.8s ease-out forwards,
-    glow 3s infinite alternate;
+        0 0 10px #a678ff,
+        0 0 30px #a678ff,
+        0 0 60px #7b4dff;
 }
 
 
-@keyframes glow {
+@keyframes revealText {
 
-    from {
-        filter: brightness(1);
+    0% {
+        opacity:0;
+        transform: scale(0.5);
+        letter-spacing: 25px;
     }
 
-    to {
-        filter: brightness(1.4);
+    70% {
+        opacity:1;
+        transform: scale(1.05);
+        letter-spacing:5px;
+    }
+
+    100% {
+        opacity:1;
+        transform: scale(1);
+        letter-spacing:0;
+    }
+}
+
+
+
+@keyframes floating {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
     }
 
 }
