@@ -470,7 +470,7 @@ button { font-family: inherit; cursor: pointer; }
     width: 100%;
     text-align: center;
     font-size: 38px;
-    color:white !important;
+    color:#B57CF6;
     margin: 18px 0;
     animation: arrowMove 1.5s infinite;
     text-shadow: 0 0 15px #a678ff;
