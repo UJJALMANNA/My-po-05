@@ -1,0 +1,161 @@
+{
+  "GATE_CS": {
+    "name": "GATE CS",
+    "fullName": "Graduate Aptitude Test in Engineering — Computer Science",
+    "examMonth": 2,
+    "subjects": [
+      "Engineering Mathematics","Digital Logic","Computer Organization & Architecture",
+      "Programming & Data Structures","Algorithms","Theory of Computation",
+      "Compiler Design","Operating Systems","Databases","Computer Networks"
+    ],
+    "phases": [
+      { "name": "Foundation", "topics": ["Engineering Mathematics","Digital Logic","Programming & Data Structures"], "weight": 0.3 },
+      { "name": "Core CS", "topics": ["Algorithms","Computer Organization & Architecture","Theory of Computation"], "weight": 0.35 },
+      { "name": "Systems", "topics": ["Operating Systems","Compiler Design","Databases","Computer Networks"], "weight": 0.25 },
+      { "name": "Revision & Mocks", "topics": ["Full syllabus revision","Mock tests","PYQs","Weak area focus"], "weight": 0.1 }
+    ],
+    "resources": {
+      "Engineering Mathematics": {
+        "videos": [
+          { "title": "GATE Maths Complete — NPTEL", "url": "https://www.youtube.com/results?search_query=GATE+engineering+mathematics+NPTEL" },
+          { "title": "Linear Algebra for GATE", "url": "https://www.youtube.com/results?search_query=linear+algebra+GATE+CS" }
+        ],
+        "notes": [
+          { "title": "NPTEL Mathematics Notes", "url": "https://nptel.ac.in/courses/111/105/111105038/" }
+        ]
+      },
+      "Algorithms": {
+        "videos": [
+          { "title": "Abdul Bari — Algorithms", "url": "https://www.youtube.com/results?search_query=Abdul+Bari+algorithms+GATE" },
+          { "title": "GATE Algorithms Playlist", "url": "https://www.youtube.com/results?search_query=GATE+algorithms+complete+course" }
+        ],
+        "notes": [
+          { "title": "CLRS — Introduction to Algorithms", "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/" }
+        ]
+      },
+      "Operating Systems": {
+        "videos": [
+          { "title": "Neso Academy — OS", "url": "https://www.youtube.com/results?search_query=Neso+Academy+operating+systems" },
+          { "title": "Gate Smashers — OS", "url": "https://www.youtube.com/results?search_query=Gate+Smashers+operating+system" }
+        ],
+        "notes": [
+          { "title": "OS Notes — Gate Smashers", "url": "https://www.youtube.com/results?search_query=gate+smashers+OS+notes" }
+        ]
+      },
+      "Computer Networks": {
+        "videos": [
+          { "title": "Neso Academy — CN", "url": "https://www.youtube.com/results?search_query=Neso+Academy+computer+networks" },
+          { "title": "Gate Smashers — CN", "url": "https://www.youtube.com/results?search_query=Gate+Smashers+computer+networks" }
+        ],
+        "notes": [
+          { "title": "Forouzan Textbook Summary", "url": "https://www.youtube.com/results?search_query=computer+networks+forouzan+GATE" }
+        ]
+      }
+    }
+  },
+  "JEE_MAIN": {
+    "name": "JEE Main",
+    "fullName": "Joint Entrance Examination — Main",
+    "examMonth": 1,
+    "subjects": ["Physics","Chemistry","Mathematics"],
+    "phases": [
+      { "name": "Class 11 Concepts", "topics": ["Mechanics","Basic Maths","Organic Chemistry Basics","Algebra"], "weight": 0.3 },
+      { "name": "Class 12 Concepts", "topics": ["Electrostatics","Modern Physics","Inorganic Chemistry","Calculus"], "weight": 0.35 },
+      { "name": "Integration & Practice", "topics": ["Mixed topic practice","Previous year papers","Speed building"], "weight": 0.25 },
+      { "name": "Revision & Mocks", "topics": ["Full mock tests","Weak topic revision","Error analysis"], "weight": 0.1 }
+    ],
+    "resources": {
+      "Physics": {
+        "videos": [
+          { "title": "HC Verma Concepts — Physics Galaxy", "url": "https://www.youtube.com/results?search_query=Physics+Galaxy+JEE+Main" },
+          { "title": "Vedantu JEE Physics", "url": "https://www.youtube.com/results?search_query=Vedantu+JEE+Main+Physics" }
+        ],
+        "notes": [
+          { "title": "HC Verma Solutions", "url": "https://www.youtube.com/results?search_query=HC+Verma+solutions+JEE" }
+        ]
+      },
+      "Mathematics": {
+        "videos": [
+          { "title": "Unacademy JEE Maths", "url": "https://www.youtube.com/results?search_query=Unacademy+JEE+Main+Mathematics" },
+          { "title": "3Blue1Brown — Essence of Calculus", "url": "https://www.youtube.com/results?search_query=3Blue1Brown+essence+of+calculus" }
+        ],
+        "notes": [
+          { "title": "RD Sharma Solutions", "url": "https://www.youtube.com/results?search_query=RD+Sharma+JEE+Main+solutions" }
+        ]
+      },
+      "Chemistry": {
+        "videos": [
+          { "title": "NCERT Chemistry Lectures", "url": "https://www.youtube.com/results?search_query=NCERT+Chemistry+JEE+Main" },
+          { "title": "JEE Chemistry by Vedantu", "url": "https://www.youtube.com/results?search_query=Vedantu+JEE+chemistry+complete" }
+        ],
+        "notes": [
+          { "title": "NCERT Chemistry Notes", "url": "https://ncert.nic.in/textbook.php?lech1=0-16" }
+        ]
+      }
+    }
+  },
+  "UPSC_CSE": {
+    "name": "UPSC CSE",
+    "fullName": "UPSC Civil Services Examination",
+    "examMonth": 5,
+    "subjects": ["History","Geography","Polity","Economy","Science & Technology","Environment","Current Affairs","Essay","CSAT"],
+    "phases": [
+      { "name": "Prelims Foundation", "topics": ["NCERT reading (6-12)","Polity","History","Geography","Economy basics"], "weight": 0.3 },
+      { "name": "Mains Preparation", "topics": ["Answer writing","GS Papers 1-4","Optional subject","Essay practice"], "weight": 0.35 },
+      { "name": "Current Affairs", "topics": ["Daily newspaper reading","Monthly magazines","PIB","Government schemes"], "weight": 0.25 },
+      { "name": "Revision & Mocks", "topics": ["Test series","Previous year analysis","Interview prep"], "weight": 0.1 }
+    ],
+    "resources": {
+      "Polity": {
+        "videos": [
+          { "title": "Laxmikanth Polity — Unacademy", "url": "https://www.youtube.com/results?search_query=Laxmikanth+polity+UPSC+complete" },
+          { "title": "Vision IAS Polity Lectures", "url": "https://www.youtube.com/results?search_query=Vision+IAS+polity+lectures" }
+        ],
+        "notes": [
+          { "title": "Laxmikanth Summary Notes", "url": "https://www.youtube.com/results?search_query=Laxmikanth+polity+notes+UPSC" }
+        ]
+      },
+      "History": {
+        "videos": [
+          { "title": "NCERT History Lectures", "url": "https://www.youtube.com/results?search_query=NCERT+history+UPSC+lectures" },
+          { "title": "Modern India by Spectrum", "url": "https://www.youtube.com/results?search_query=Spectrum+Modern+India+UPSC" }
+        ],
+        "notes": [
+          { "title": "Ancient & Medieval History Notes", "url": "https://www.youtube.com/results?search_query=ancient+medieval+history+UPSC+notes" }
+        ]
+      }
+    }
+  },
+  "CAT": {
+    "name": "CAT",
+    "fullName": "Common Admission Test",
+    "examMonth": 11,
+    "subjects": ["Quantitative Aptitude","Verbal Ability & Reading Comprehension","Data Interpretation & Logical Reasoning"],
+    "phases": [
+      { "name": "Concepts", "topics": ["Number Systems","Algebra","Geometry","Grammar fundamentals","Basic DI"], "weight": 0.3 },
+      { "name": "Practice", "topics": ["Topic-wise practice sets","RC passages","Logical puzzles","Data sets"], "weight": 0.35 },
+      { "name": "Speed & Accuracy", "topics": ["Timed sectional tests","Shortcut techniques","Elimination strategies"], "weight": 0.25 },
+      { "name": "Full Mocks", "topics": ["Full-length mock CATs","Analysis sessions","IIM cut-off strategies"], "weight": 0.1 }
+    ],
+    "resources": {
+      "Quantitative Aptitude": {
+        "videos": [
+          { "title": "Arun Sharma QA — YouTube", "url": "https://www.youtube.com/results?search_query=CAT+quantitative+aptitude+Arun+Sharma" },
+          { "title": "2IIM CAT Quant", "url": "https://www.youtube.com/results?search_query=2IIM+CAT+quant+lectures" }
+        ],
+        "notes": [
+          { "title": "Arun Sharma QA Book Summary", "url": "https://www.youtube.com/results?search_query=CAT+quant+preparation+tips" }
+        ]
+      },
+      "Verbal Ability & Reading Comprehension": {
+        "videos": [
+          { "title": "CAT VARC Strategy", "url": "https://www.youtube.com/results?search_query=CAT+VARC+strategy+complete" },
+          { "title": "Reading Comprehension Tips", "url": "https://www.youtube.com/results?search_query=CAT+reading+comprehension+tips" }
+        ],
+        "notes": [
+          { "title": "VARC Notes & Shortcuts", "url": "https://www.youtube.com/results?search_query=CAT+verbal+ability+notes" }
+        ]
+      }
+    }
+  }
+}
