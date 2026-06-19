@@ -590,27 +590,27 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* Login botton design by Ujjal */
-/* --- Modern Pill-Shaped Dropdown Button --- */
+/* --- Orange Pill-Shaped Dropdown Button --- */
 .nav__dropbtn {
-  background: rgba(255, 255, 255, 0.05); /* Subtle transparent background */
-  color: #ffffff;
-  padding: 8px 24px; /* Thicker horizontal padding for the pill shape */
+  background: rgba(255, 140, 0, 0.05); /* Subtle orange transparent background */
+  color: #ffffff; 
+  padding: 8px 24px;
   font-size: 15px;
   font-weight: 500;
   font-family: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Light, delicate border */
-  border-radius: 30px; /* This creates the rounded 'pill' shape */
+  border: 1px solid rgba(255, 140, 0, 0.5); /* Orange-tinted border */
+  border-radius: 30px; 
   cursor: pointer;
-  transition: all 0.3s ease; /* Smooth transition for everything */
-  margin-left: 10px; /* Gives it a little breathing room from the other links */
+  transition: all 0.3s ease; 
+  margin-left: 10px; 
 }
 
-/* Vibrant Hover & Active State */
+/* Vibrant Orange Hover & Active State */
 .nav__dropdown:hover .nav__dropbtn, 
 .nav__dropbtn:hover {
-  background: linear-gradient(135deg, #b366ff, #8a2be2); /* Purple gradient */
-  border-color: transparent; /* Removes the border when hovering */
+  background: linear-gradient(135deg, #ffaa00, #ff5500); /* Bright orange gradient */
+  border-color: transparent; /* Removes the border to let the gradient shine */
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(179, 102, 255, 0.4); /* Adds a soft purple glow */
+  box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4); /* Adds a soft orange glow */
   transform: translateY(-2px); /* Slight lift effect */
 }
