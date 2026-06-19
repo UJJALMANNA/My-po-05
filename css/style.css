@@ -156,15 +156,102 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-body); font-weight: 600; font-size: 0.92rem;
 }
 .nav__links a {
-  opacity: 0.75; transition: opacity 0.2s ease, color 0.2s ease; color: var(--ink);
-  display: flex; align-items: baseline; gap: 0.4em;
+    position: relative;
+
+    opacity: .75;
+    color: var(--ink);
+
+    transition: .3s;
+
+    display: flex;
+    align-items: baseline;
+    gap: .4em;
 }
-.nav__links a:hover { opacity: 1; color: var(--c-indigo); }
+
+.nav__links a::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-6px;
+
+    width:0;
+    height:2px;
+
+    transform:translateX(-50%);
+
+    background:linear-gradient(
+      90deg,
+      #8b5cf6,
+      #ec4899
+    );
+
+    transition:.3s;
+}
+
+.nav__links a:hover::after{
+    width:100%;
+}
+
+.nav__links a:hover {
+    opacity: 1;
+    color: #c084fc;
+
+    text-shadow:
+        0 0 8px #8b5cf6,
+        0 0 16px #8b5cf6;
+}
+
 .nav__num { display: none; }
 .nav__cta {
-  background: var(--grad-primary); color: #fff !important; padding: 0.55em 1.3em; border-radius: 999px;
-  opacity: 1 !important; box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #9b5cff,
+        #ff6bb5
+    );
+
+    color:#fff !important;
+
+    padding:0.55em 1.3em;
+
+    border-radius:999px;
+
+    opacity:1 !important;
+
+    box-shadow:0 10px 30px rgba(155,92,255,.25);
+
+    transition:.3s;
+}
+.nav__cta::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:-120%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.5),
+      transparent
+    );
+}
+
+.nav__cta:hover::before{
+    animation:shine .8s forwards;
+}
+
+@keyframes shine{
+    to{
+        left:120%;
+    }
 }
 .nav__cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: #fff !important; }
 .nav__toggle {
