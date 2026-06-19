@@ -30,7 +30,7 @@ if (userInfo && userNameDisplay) {
   userNameDisplay.textContent = displayName;
   userInfo.style.display = "flex";
 }
-    }
+    
 
     // Put a single Logout button in navAuthSlot
     if (navAuthSlot) {
