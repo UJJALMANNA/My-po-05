@@ -76,6 +76,8 @@ if (!profession) {
   password: password,
   options: {
     data: {
+      first_name: firstName,
+      last_name: lastName,
       mobile_number: mobile,
       age: parseInt(age),
       profession: profession
