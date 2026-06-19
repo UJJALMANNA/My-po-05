@@ -46,11 +46,27 @@ function redirectAfterLogin() {
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessage();
+const firstName = document.getElementById('signFirstname').value;
+const lastName = document.getElementById('signLastname').value;
+const email = document.getElementById("signupEmail").value.trim();
+const mobile = document.getElementById("signupMobile").value.trim();
+const age = document.getElementById("signupAge").value.trim();
+const profession = document.getElementById("signupProfession").value;
+const password = document.getElementById("signupPassword").value;
+const confirmPassword = document.getElementById("signupConfirmPassword").value;
+const submitBtn = document.getElementById("signupSubmitBtn");
 
-  const email = document.getElementById("signupEmail").value.trim();
-  const mobile = document.getElementById("signupMobile").value.trim();
-  const password = document.getElementById("signupPassword").value;
-  const submitBtn = document.getElementById("signupSubmitBtn");
+// Check passwords match
+if (password !== confirmPassword) {
+  showMessage("Passwords do not match!", "red"); // use whatever your existing error-display function/pattern is, or swap for your messageBox code
+  return;
+}
+
+// Check profession was selected
+if (!profession) {
+  showMessage("Please select your profession.", "red");
+  return;
+}
 
   submitBtn.disabled = true;
   submitBtn.textContent = "Creating account...";
