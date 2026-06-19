@@ -147,14 +147,14 @@ button { font-family: inherit; cursor: pointer; }
 /* .nav__user {
   color: rgba(255, 255, 255, 0.85);
 } */
-.nav {
+/* .nav {
   background: rgba(13, 11, 20, 0.95) !important;
   backdrop-filter: blur(14px);
 }
 
 .nav__user {
   color: #ffffff !important;
-}
+} */
 
 /* ===========================================================
    HERO
