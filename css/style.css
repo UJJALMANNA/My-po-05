@@ -614,16 +614,35 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4); /* Adds a soft orange glow */
   transform: translateY(-2px); /* Slight lift effect */
 }
-/* new */
-/* --- Logged-In User Name Styling --- */
 .nav__user-info {
-  display: inline-block;
-  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  color: var(--ink, #fff);
+  padding: 0 0.8em;
 }
 
-#userNameDisplay {
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+.nav__user-info::before {
+  content: "👤";
+  font-size: 0.9em;
+}
+
+.auth-btn {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-radius: 999px;
+  border: 1px solid var(--line, #444);
+  background: transparent;
+  color: var(--ink, #fff);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+  background: rgba(124, 58, 237, 0.15);
+  border-color: var(--c-indigo, #7c3aed);
 }
