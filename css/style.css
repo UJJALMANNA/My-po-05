@@ -107,43 +107,10 @@ button { font-family: inherit; cursor: pointer; }
 
     padding: var(--space-2) var(--space-4);
 
-    background: rgba(5,3,8,.75);
-    backdrop-filter: blur(18px);
+    background: rgba(5, 3, 8, 0.8);
+    backdrop-filter: blur(14px);
 
     border-bottom: 1px solid var(--line);
-
-    overflow: hidden;
-    transition: all .3s ease;
-}
-/* I am placing the code */
-.nav::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:2px;
-
-    background:linear-gradient(
-      90deg,
-      transparent,
-      #8b5cf6,
-      #ec4899,
-      transparent
-    );
-
-    background-size:300% 100%;
-    animation:navGlow 6s linear infinite;
-}
-
-@keyframes navGlow{
-    from{
-        background-position:0%;
-    }
-    to{
-        background-position:300%;
-    }
 }
 .nav__mark {
   font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;
@@ -196,62 +163,22 @@ button { font-family: inherit; cursor: pointer; }
 
 .nav__links a:hover {
     opacity: 1;
-    color: #c084fc;
-
-    text-shadow:
-        0 0 8px #8b5cf6,
-        0 0 16px #8b5cf6;
+    color: var(--c-indigo);
 }
 
 .nav__num { display: none; }
 .nav__cta {
-    position: relative;
-    overflow: hidden;
+    background: var(--grad-primary);
+    color: #fff !important;
+    padding: 0.55em 1.3em;
+    border-radius: 999px;
 
-    background: linear-gradient(
-        135deg,
-        #9b5cff,
-        #ff6bb5
-    );
+    opacity: 1 !important;
+    box-shadow: var(--shadow-sm);
 
-    color:#fff !important;
-
-    padding:0.55em 1.3em;
-
-    border-radius:999px;
-
-    opacity:1 !important;
-
-    box-shadow:0 10px 30px rgba(155,92,255,.25);
-
-    transition:.3s;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
 }
-.nav__cta::before{
-    content:"";
-
-    position:absolute;
-    top:0;
-    left:-120%;
-
-    width:100%;
-    height:100%;
-
-    background:linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.5),
-      transparent
-    );
-}
-
-.nav__cta:hover::before{
-    animation:shine .8s forwards;
-}
-
-@keyframes shine{
-    to{
-        left:120%;
-    }
 }
 .nav__cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: #fff !important; }
 .nav__toggle {
