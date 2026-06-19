@@ -72,14 +72,16 @@ if (!profession) {
   submitBtn.textContent = "Creating account...";
 
   const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-      data: {
-        mobile_number: mobile
-      }
+  email: email,
+  password: password,
+  options: {
+    data: {
+      mobile_number: mobile,
+      age: parseInt(age),
+      profession: profession
     }
-  });
+  }
+});
 
   submitBtn.disabled = false;
   submitBtn.textContent = "Create Account";
