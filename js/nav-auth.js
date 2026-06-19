@@ -34,3 +34,39 @@
     }
   }
 })();
+/* new update */
+// Get the HTML elements
+const loginDropdown = document.getElementById('loginDropdown');
+const userInfo = document.getElementById('userInfo');
+const userNameDisplay = document.getElementById('userNameDisplay');
+
+// 1. Check the session as soon as the page loads
+supabase.auth.getSession().then(({ data: { session } }) => {
+    updateNavbar(session);
+});
+
+// 2. Listen for any login or logout events in real-time
+supabase.auth.onAuthStateChange((event, session) => {
+    updateNavbar(session);
+});
+
+// 3. The function that shows/hides the correct UI
+function updateNavbar(session) {
+    if (session) {
+        // --- USER IS LOGGED IN ---
+        if (loginDropdown) loginDropdown.style.display = 'none'; // Hide the Login button
+        if (userInfo) userInfo.style.display = 'inline-block'; // Show the User Info container
+        
+        // Grab the user's email (e.g., gateujjal@gmail.com) and extract the name part
+        const userEmail = session.user.email;
+        const namePrefix = userEmail.split('@')[0]; 
+        
+        // Display a greeting
+        if (userNameDisplay) userNameDisplay.textContent = 'Welcome, ' + namePrefix; 
+        
+    } else {
+        // --- USER IS LOGGED OUT ---
+        if (loginDropdown) loginDropdown.style.display = 'inline-block'; // Show the Login button
+        if (userInfo) userInfo.style.display = 'none'; // Hide the User Info container
+    }
+}
