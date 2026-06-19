@@ -614,3 +614,16 @@ button { font-family: inherit; cursor: pointer; }
   box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4); /* Adds a soft orange glow */
   transform: translateY(-2px); /* Slight lift effect */
 }
+/* new */
+/* --- Logged-In User Name Styling --- */
+.nav__user-info {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+#userNameDisplay {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
