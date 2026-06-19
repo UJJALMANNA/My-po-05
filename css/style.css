@@ -528,3 +528,63 @@ button { font-family: inherit; cursor: pointer; }
         opacity:0;
     }
 }
+/* Adding style for Login Button Ujjal */ 
+/* --- Navigation Dropdown Styles --- */
+
+/* The container <div> - needed to position the dropdown content */
+.nav__dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Button Styling */
+.nav__dropbtn {
+  background-color: transparent;
+  color: #ffffff; /* Adjust to match your nav link color */
+  padding: 10px 15px;
+  font-size: 16px; /* Match your nav font size */
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Change color on hover */
+.nav__dropdown:hover .nav__dropbtn {
+  color: #b366ff; /* A purple hue matching your 'Query' button */
+}
+
+/* Dropdown Content (Hidden by Default) */
+.nav__dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; /* Aligns the dropdown to the right edge of the button */
+  background-color: #1a1a24; /* Dark background matching your theme */
+  min-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+  z-index: 100;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Links inside the dropdown */
+.nav__dropdown-content a {
+  color: #ffffff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+/* Change background color of dropdown links on hover */
+.nav__dropdown-content a:hover {
+  background-color: #2a2a35; 
+  color: #ffffff; /* Prevents text from turning black/invisible on hover */
+}
+
+/* Show the dropdown menu on hover */
+.nav__dropdown:hover .nav__dropdown-content {
+  display: block;
+}
