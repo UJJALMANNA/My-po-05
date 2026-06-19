@@ -24,9 +24,10 @@
     }
 
    
-   // Show the user's first name (falls back to email username if missing)
+  
+// Show the username (use part before @ in email as display name)
 if (userInfo && userNameDisplay) {
-  const displayName = session.user.user_metadata?.first_name || session.user.email.split("@")[0];
+  const displayName = session.user.email.split("@")[0];
   userNameDisplay.textContent = displayName;
   userInfo.style.display = "flex";
 }
