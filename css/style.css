@@ -145,14 +145,75 @@ button { font-family: inherit; cursor: pointer; }
   .nav__links.is-open { transform: translateX(0); }
 }
 
-/* .nav {
+/* Dark navbar background */
+.nav {
   background: rgba(13, 11, 20, 0.95) !important;
-  backdrop-filter: blur(14px);
-} */
+}
 
-.nav__user {
+/* Username visible after login */
+#userNameDisplay {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+/* Login dropdown wrapper */
+.nav__dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Login button */
+.nav__dropbtn {
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 0.45em 1.1em;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.nav__dropbtn:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Dropdown menu hidden by default */
+.nav__dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #1a1726;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  min-width: 160px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Dropdown links */
+.nav__dropdown-content a {
+  display: block;
+  padding: 0.75em 1.2em;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+  opacity: 1 !important;
+}
+.nav__dropdown-content a:hover {
+  background: rgba(108, 92, 231, 0.2);
   color: #ffffff !important;
-} 
+}
+
+/* Show dropdown on hover */
+.nav__dropdown:hover .nav__dropdown-content {
+  display: block;
+}
 
 /* ===========================================================
    HERO
