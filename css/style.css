@@ -144,6 +144,9 @@ button { font-family: inherit; cursor: pointer; }
   }
   .nav__links.is-open { transform: translateX(0); }
 }
+.nav__user {
+  color: rgba(255, 255, 255, 0.85);
+}
 
 /* ===========================================================
    HERO
