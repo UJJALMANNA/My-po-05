@@ -87,6 +87,8 @@ function wireNavigation() {
   document.getElementById('toStep3').addEventListener('click', () => {
     goToStep(3);
     buildPlan();
+    localStorage.setItem('um_exam', selectedExam);
+    localStorage.setItem('um_year', selectedYear);
   });
   document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
 }
