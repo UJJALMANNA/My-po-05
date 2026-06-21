@@ -43,6 +43,94 @@
   .btn--approve { background: linear-gradient(120deg, #4FD1C5, #16A085); color: #fff; border: none; }
   .btn--delete { background: linear-gradient(120deg, #E74C3C, #C0392B); color: #fff; border: none; }
   .btn--small { padding: 0.5em 1.2em; font-size: 0.85rem; }
+
+  /* ── ADMIN TABS ── */
+  .admin-tabs {
+    display: flex; gap: 0.5rem; margin-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line); flex-wrap: wrap;
+  }
+  .admin-tab {
+    background: none; border: none; padding: 0.7em 1.1em; font-weight: 700; font-size: 0.92rem;
+    color: var(--ink-dim); border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .admin-tab.is-active { color: var(--c-indigo); border-bottom-color: var(--c-indigo); }
+  .admin-section { display: none; }
+  .admin-section.is-active { display: block; }
+
+  /* ── PYQ FORM ── */
+  .pyq-form {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--space-3); margin-bottom: var(--space-3); box-shadow: var(--shadow-sm);
+  }
+  .pyq-form h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
+  .pyq-form-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+  .pyq-form-field { flex: 1; min-width: 160px; }
+  .pyq-form-field--full { flex-basis: 100%; }
+  .pyq-form-field label {
+    display: block; font-size: 0.78rem; font-weight: 700; color: var(--ink-dim);
+    margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .pyq-form-field input, .pyq-form-field select, .pyq-form-field textarea {
+    width: 100%; background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+    font-family: var(--font-body); font-size: 0.92rem; padding: 0.65em 0.85em; border-radius: var(--radius-sm);
+  }
+  .pyq-form-field input:focus, .pyq-form-field select:focus, .pyq-form-field textarea:focus {
+    outline: none; border-color: var(--c-indigo); box-shadow: 0 0 0 3px rgba(108,92,231,0.12);
+  }
+  .pyq-form-field textarea { resize: vertical; min-height: 70px; font-family: var(--font-body); }
+  .pyq-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .pyq-option-row { display: flex; gap: 0.5rem; align-items: center; }
+  .pyq-option-row span {
+    font-family: var(--font-mono); font-weight: 700; color: var(--c-indigo);
+    width: 22px; flex-shrink: 0;
+  }
+  .pyq-form-msg { font-size: 0.85rem; min-height: 1.2em; margin-top: 0.5rem; }
+  .pyq-form-msg.ok { color: #16A085; }
+  .pyq-form-msg.err { color: #E74C3C; }
+
+  /* ── CSV IMPORT ── */
+  .csv-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--space-3); margin-bottom: var(--space-3); box-shadow: var(--shadow-sm);
+  }
+  .csv-box h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .csv-box p { color: var(--ink-dim); font-size: 0.88rem; margin-bottom: var(--space-2); }
+  .csv-box code {
+    background: rgba(108,92,231,0.08); padding: 0.15em 0.5em; border-radius: 5px;
+    font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-indigo);
+  }
+  .csv-dropzone {
+    border: 2px dashed var(--line); border-radius: var(--radius-sm); padding: var(--space-3);
+    text-align: center; color: var(--ink-dim); cursor: pointer; transition: border-color 0.2s;
+    margin-bottom: var(--space-2);
+  }
+  .csv-dropzone:hover, .csv-dropzone.is-dragover { border-color: var(--c-indigo); color: var(--c-indigo); }
+  .csv-preview-table {
+    width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: var(--space-2);
+    display: block; overflow-x: auto; white-space: nowrap;
+  }
+  .csv-preview-table th, .csv-preview-table td {
+    border: 1px solid var(--line); padding: 0.4em 0.6em; text-align: left;
+  }
+  .csv-preview-table th { background: rgba(108,92,231,0.06); font-family: var(--font-mono); font-size: 0.72rem; }
+  .csv-row-error { background: rgba(231,76,60,0.08); }
+  .csv-summary { font-size: 0.88rem; margin-bottom: var(--space-2); }
+  .csv-summary .ok-count { color: #16A085; font-weight: 700; }
+  .csv-summary .err-count { color: #E74C3C; font-weight: 700; }
+
+  /* ── QUESTION LIST ── */
+  .pyq-list-item {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm);
+    padding: var(--space-2); margin-bottom: 0.6rem; font-size: 0.88rem;
+  }
+  .pyq-list-item__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+  .pyq-tag {
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; padding: 0.2em 0.7em;
+    border-radius: 999px; background: rgba(108,92,231,0.1); color: var(--c-indigo);
+  }
+  .pyq-list-item__q { color: var(--ink); margin-bottom: 0.3rem; }
+  .pyq-list-item__actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
 </style>
 </head>
 <body>
@@ -64,18 +152,193 @@
 
 <!-- ADMIN PANEL (hidden until unlocked) -->
 <main class="admin-wrap" id="adminPanel" style="display:none;">
-  <div class="section__head">
-    <h2>Moderate Posts</h2>
-    <p class="section__sub">Approve pending submissions or delete anything inappropriate. Deletions are permanent.</p>
+
+  <div class="admin-tabs">
+    <button class="admin-tab is-active" data-tab="posts">Moderate Posts</button>
+    <button class="admin-tab" data-tab="pyq-add">Add PYQ</button>
+    <button class="admin-tab" data-tab="pyq-import">Bulk Import (CSV)</button>
+    <button class="admin-tab" data-tab="pyq-list">All Questions</button>
   </div>
-  <div id="adminPostsList">
-    <p class="news__loading">Loading…</p>
-  </div>
+
+  <!-- TAB: MODERATE POSTS (existing) -->
+  <section class="admin-section is-active" id="tab-posts">
+    <div class="section__head">
+      <h2>Moderate Posts</h2>
+      <p class="section__sub">Approve pending submissions or delete anything inappropriate. Deletions are permanent.</p>
+    </div>
+    <div id="adminPostsList">
+      <p class="news__loading">Loading…</p>
+    </div>
+  </section>
+
+  <!-- TAB: ADD SINGLE PYQ -->
+  <section class="admin-section" id="tab-pyq-add">
+    <div class="section__head">
+      <h2>Add a PYQ</h2>
+      <p class="section__sub">Add one Previous Year Question at a time, tagged for pattern analysis.</p>
+    </div>
+
+    <form class="pyq-form" id="pyqForm">
+      <div class="pyq-form-row">
+        <div class="pyq-form-field">
+          <label>Exam</label>
+          <select id="pf_exam" required>
+            <option value="GATE_CS">GATE CS</option>
+            <option value="GATE_EC">GATE EC</option>
+            <option value="JEE_MAIN">JEE Main</option>
+            <option value="UPSC_CSE">UPSC CSE</option>
+            <option value="CAT">CAT</option>
+          </select>
+        </div>
+        <div class="pyq-form-field">
+          <label>Year</label>
+          <input type="number" id="pf_year" min="1990" max="2030" placeholder="2024" required>
+        </div>
+        <div class="pyq-form-field">
+          <label>Marks</label>
+          <input type="number" id="pf_marks" min="0.5" step="0.5" value="1" required>
+        </div>
+      </div>
+
+      <div class="pyq-form-row">
+        <div class="pyq-form-field">
+          <label>Subject</label>
+          <input type="text" id="pf_subject" placeholder="e.g. Operating Systems" required>
+        </div>
+        <div class="pyq-form-field">
+          <label>Topic</label>
+          <input type="text" id="pf_topic" placeholder="e.g. Deadlock" required>
+        </div>
+      </div>
+
+      <div class="pyq-form-row">
+        <div class="pyq-form-field">
+          <label>Difficulty</label>
+          <select id="pf_difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="pyq-form-field">
+          <label>Type</label>
+          <select id="pf_type">
+            <option value="mcq">MCQ (single answer)</option>
+            <option value="msq">MSQ (multiple answers)</option>
+            <option value="numerical">Numerical</option>
+          </select>
+        </div>
+        <div class="pyq-form-field">
+          <label>Source note</label>
+          <input type="text" id="pf_source" placeholder="e.g. GATE CS 2023, Q.45">
+        </div>
+      </div>
+
+      <div class="pyq-form-row">
+        <div class="pyq-form-field pyq-form-field--full">
+          <label>Question text</label>
+          <textarea id="pf_question" placeholder="Type the question here…" required></textarea>
+        </div>
+      </div>
+
+      <div class="pyq-form-row" id="pf_optionsWrap">
+        <div class="pyq-form-field pyq-form-field--full">
+          <label>Options (leave blank for Numerical type)</label>
+          <div class="pyq-options-grid">
+            <div class="pyq-option-row"><span>A.</span><input type="text" id="pf_optA" placeholder="Option A"></div>
+            <div class="pyq-option-row"><span>B.</span><input type="text" id="pf_optB" placeholder="Option B"></div>
+            <div class="pyq-option-row"><span>C.</span><input type="text" id="pf_optC" placeholder="Option C"></div>
+            <div class="pyq-option-row"><span>D.</span><input type="text" id="pf_optD" placeholder="Option D"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pyq-form-row">
+        <div class="pyq-form-field">
+          <label>Correct answer</label>
+          <input type="text" id="pf_correct" placeholder="e.g. B  or  B,D  or  4.5" required>
+        </div>
+      </div>
+
+      <div class="pyq-form-row">
+        <div class="pyq-form-field pyq-form-field--full">
+          <label>Explanation (optional)</label>
+          <textarea id="pf_explanation" placeholder="Why is this the correct answer?"></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--solid">Save Question</button>
+      <p class="pyq-form-msg" id="pf_msg"></p>
+    </form>
+  </section>
+
+  <!-- TAB: CSV BULK IMPORT -->
+  <section class="admin-section" id="tab-pyq-import">
+    <div class="section__head">
+      <h2>Bulk Import PYQs</h2>
+      <p class="section__sub">Upload a CSV file to add many questions at once.</p>
+    </div>
+
+    <div class="csv-box">
+      <h3>CSV format</h3>
+      <p>Your CSV must have this exact header row (in any column order):</p>
+      <p><code>exam_key,subject,topic,year,difficulty,marks,question_type,question_text,option_a,option_b,option_c,option_d,correct_answer,explanation,source_note</code></p>
+      <p>Leave <code>option_a</code>–<code>option_d</code> blank for numerical questions. For <code>question_type</code> use <code>mcq</code>, <code>msq</code>, or <code>numerical</code>. For <code>difficulty</code> use <code>easy</code>, <code>medium</code>, or <code>hard</code>.</p>
+
+      <div class="csv-dropzone" id="csvDropzone">
+        📄 Click to choose a CSV file, or drag one here
+        <input type="file" id="csvFileInput" accept=".csv" style="display:none">
+      </div>
+
+      <div id="csvPreviewWrap" style="display:none">
+        <p class="csv-summary" id="csvSummary"></p>
+        <table class="csv-preview-table" id="csvPreviewTable"></table>
+        <button class="btn btn--solid" id="csvImportBtn">Import Valid Rows</button>
+        <p class="pyq-form-msg" id="csvMsg"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB: ALL QUESTIONS -->
+  <section class="admin-section" id="tab-pyq-list">
+    <div class="section__head">
+      <h2>All Questions</h2>
+      <p class="section__sub">Browse and delete existing PYQ bank entries.</p>
+    </div>
+    <div class="pyq-form-row">
+      <div class="pyq-form-field">
+        <label>Filter by exam</label>
+        <select id="listExamFilter">
+          <option value="">All exams</option>
+          <option value="GATE_CS">GATE CS</option>
+          <option value="GATE_EC">GATE EC</option>
+          <option value="JEE_MAIN">JEE Main</option>
+          <option value="UPSC_CSE">UPSC CSE</option>
+          <option value="CAT">CAT</option>
+        </select>
+      </div>
+    </div>
+    <div id="pyqListWrap">
+      <p class="news__loading">Loading…</p>
+    </div>
+  </section>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="js/config.js"></script>
 <script src="js/admin.js"></script>
-
+<script src="js/pyq-admin.js"></script>
+<script>
+  // Simple tab switcher for the admin panel sections
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('is-active'));
+      document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('is-active');
+    });
+  });
+</script>
 </body>
 </html>
