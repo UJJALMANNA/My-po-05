@@ -418,84 +418,84 @@
       .nav__links { display: none; }
     }
 
-    /*Adding style to To Do list   */
+    /* ── TODO + FOCUS CLOCK ── */
     .section-card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
-  padding: 1.5rem; animation: fadeUp 0.5s ease both;
-}
-.todo-row {
-  display: flex; gap: 8px; margin-bottom: 1rem;
-}
-.todo-row input[type="text"], .todo-row select {
-  background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r-sm);
-  color: #fff; padding: 0.55em 0.8em; font-family: inherit; font-size: 0.88rem;
-}
-.todo-row input[type="text"] { flex: 1; }
-.todo-row select { width: 130px; }
-.todo-row button {
-  background: var(--grad); border: none; color: #fff; width: 38px; border-radius: var(--r-sm);
-  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-}
-.todo-list { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; margin-bottom: 1.25rem; }
-.todo-item {
-  display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.75rem;
-  background: var(--surface2); border-radius: var(--r-sm);
-}
-.todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--c1); cursor: pointer; }
-.todo-item .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.todo-item .txt { flex: 1; font-size: 0.85rem; color: rgba(255,255,255,0.85); }
-.todo-item .txt.done { text-decoration: line-through; color: rgba(255,255,255,0.35); }
-.todo-item .subj-tag { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-family: var(--ff-mono); }
-.todo-item .del-btn {
-  background: none; border: none; color: rgba(255,255,255,0.3); width: 22px; height: 22px;
-  font-size: 0.9rem; transition: color 0.2s;
-}
-.todo-item .del-btn:hover { color: var(--c3); }
-.chart-switch { display: flex; gap: 6px; margin-bottom: 0.9rem; }
-.chart-switch button {
-  flex: 1; background: transparent; border: 1px solid var(--line); color: rgba(255,255,255,0.6);
-  padding: 0.4em 0.5em; border-radius: var(--r-sm); font-size: 0.78rem; font-weight: 600;
-  transition: all 0.2s;
-}
-.chart-switch button.active { background: rgba(108,92,231,0.2); border-color: var(--c1); color: #fff; }
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 1.5rem; animation: fadeUp 0.5s ease both;
+    }
+    .todo-row {
+      display: flex; gap: 8px; margin-bottom: 1rem;
+    }
+    .todo-row input[type="text"], .todo-row select {
+      background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r-sm);
+      color: #fff; padding: 0.55em 0.8em; font-family: inherit; font-size: 0.88rem;
+    }
+    .todo-row input[type="text"] { flex: 1; }
+    .todo-row select { width: 130px; }
+    .todo-row button {
+      background: var(--grad); border: none; color: #fff; width: 38px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .todo-list { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; margin-bottom: 1.25rem; }
+    .todo-item {
+      display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.75rem;
+      background: var(--surface2); border-radius: var(--r-sm);
+    }
+    .todo-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--c1); cursor: pointer; }
+    .todo-item .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .todo-item .txt { flex: 1; font-size: 0.85rem; color: rgba(255,255,255,0.85); }
+    .todo-item .txt.done { text-decoration: line-through; color: rgba(255,255,255,0.35); }
+    .todo-item .subj-tag { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-family: var(--ff-mono); }
+    .todo-item .del-btn {
+      background: none; border: none; color: rgba(255,255,255,0.3); width: 22px; height: 22px;
+      font-size: 0.9rem; transition: color 0.2s;
+    }
+    .todo-item .del-btn:hover { color: var(--c3); }
+    .chart-switch { display: flex; gap: 6px; margin-bottom: 0.9rem; }
+    .chart-switch button {
+      flex: 1; background: transparent; border: 1px solid var(--line); color: rgba(255,255,255,0.6);
+      padding: 0.4em 0.5em; border-radius: var(--r-sm); font-size: 0.78rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .chart-switch button.active { background: rgba(108,92,231,0.2); border-color: var(--c1); color: #fff; }
 
-.clock-modes { display: flex; gap: 6px; margin-bottom: 1rem; }
-.clock-modes button {
-  flex: 1; background: transparent; border: 1px solid var(--line); color: rgba(255,255,255,0.6);
-  padding: 0.45em; border-radius: var(--r-sm); font-size: 0.8rem; font-weight: 600;
-}
-.clock-modes button.active { background: rgba(108,92,231,0.2); border-color: var(--c1); color: #fff; }
-.timer-setup { display: none; align-items: center; gap: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
-.timer-setup input {
-  width: 70px; background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r-sm);
-  color: #fff; padding: 0.4em 0.6em; font-family: inherit;
-}
-.clock-display {
-  text-align: center; padding: 1.5rem 0;
-}
-.clock-display .time {
-  font-family: var(--ff-display); font-size: 2.6rem; font-weight: 800;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
-  font-variant-numeric: tabular-nums;
-}
-.clock-display .status { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; font-family: var(--ff-mono); }
-.clock-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 1.25rem; }
-.clock-btns button {
-  border-radius: 999px; padding: 0.55em 1.2em; font-size: 0.85rem; font-weight: 700; border: none;
-}
-.btn-clock-start { background: var(--grad); color: #fff; }
-.btn-clock-pause { background: rgba(255,159,90,0.2); border: 1px solid rgba(255,159,90,0.4) !important; color: #ffb877; }
-.btn-clock-finish { background: rgba(79,209,197,0.2); border: 1px solid rgba(79,209,197,0.4) !important; color: #7fe3d6; }
-.btn-clock-reset { background: transparent; border: 1px solid var(--line) !important; color: rgba(255,255,255,0.5); width: 38px; }
-.session-list { font-size: 0.82rem; }
-.session-row { display: flex; justify-content: space-between; padding: 0.4rem 0; color: rgba(255,255,255,0.6); border-bottom: 1px solid var(--line); }
-.session-row:last-child { border-bottom: none; }
-.focus-total { font-size: 0.85rem; margin-top: 0.75rem; color: rgba(255,255,255,0.8); }
-.focus-total b { font-family: var(--ff-display); color: #fff; }
+    .clock-modes { display: flex; gap: 6px; margin-bottom: 1rem; }
+    .clock-modes button {
+      flex: 1; background: transparent; border: 1px solid var(--line); color: rgba(255,255,255,0.6);
+      padding: 0.45em; border-radius: var(--r-sm); font-size: 0.8rem; font-weight: 600;
+    }
+    .clock-modes button.active { background: rgba(108,92,231,0.2); border-color: var(--c1); color: #fff; }
+    .timer-setup { display: none; align-items: center; gap: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .timer-setup input {
+      width: 70px; background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r-sm);
+      color: #fff; padding: 0.4em 0.6em; font-family: inherit;
+    }
+    .clock-display {
+      text-align: center; padding: 1.5rem 0;
+    }
+    .clock-display .time {
+      font-family: var(--ff-display); font-size: 2.6rem; font-weight: 800;
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+    .clock-display .status { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; font-family: var(--ff-mono); }
+    .clock-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 1.25rem; }
+    .clock-btns button {
+      border-radius: 999px; padding: 0.55em 1.2em; font-size: 0.85rem; font-weight: 700; border: none;
+    }
+    .btn-clock-start { background: var(--grad); color: #fff; }
+    .btn-clock-pause { background: rgba(255,159,90,0.2); border: 1px solid rgba(255,159,90,0.4) !important; color: #ffb877; }
+    .btn-clock-finish { background: rgba(79,209,197,0.2); border: 1px solid rgba(79,209,197,0.4) !important; color: #7fe3d6; }
+    .btn-clock-reset { background: transparent; border: 1px solid var(--line) !important; color: rgba(255,255,255,0.5); width: 38px; }
+    .session-list { font-size: 0.82rem; }
+    .session-row { display: flex; justify-content: space-between; padding: 0.4rem 0; color: rgba(255,255,255,0.6); border-bottom: 1px solid var(--line); }
+    .session-row:last-child { border-bottom: none; }
+    .focus-total { font-size: 0.85rem; margin-top: 0.75rem; color: rgba(255,255,255,0.8); }
+    .focus-total b { font-family: var(--ff-display); color: #fff; }
 
-@media (max-width: 900px) {
-  .productivity-grid { grid-template-columns: 1fr !important; }
-}
+    @media (max-width: 900px) {
+      .productivity-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -1073,12 +1073,69 @@ async function renderDashboard(skipAuthCheck) {
         </div>
       </div>
     </div>
+
+    <!-- PRODUCTIVITY: TODO + FOCUS TIMER -->
+    <div class="productivity-grid" style="display:grid;grid-template-columns:1.1fr 1fr;gap:1.25rem;margin-top:1.25rem;">
+
+      <div class="section-card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad)"></span>
+          To-Do List
+          <span style="margin-left:auto;font-size:0.78rem;color:rgba(255,255,255,0.4);font-weight:400" id="todoCount"></span>
+        </div>
+        <div class="todo-row">
+          <input type="text" id="todoText" placeholder="Add a task..." maxlength="100" />
+          <select id="todoSubject"></select>
+          <button id="todoAdd" aria-label="Add task">+</button>
+        </div>
+        <div class="todo-list" id="todoList"></div>
+        <div class="chart-switch">
+          <button class="chart-type-btn active" data-type="doughnut">Doughnut</button>
+          <button class="chart-type-btn" data-type="bar">Bar</button>
+          <button class="chart-type-btn" data-type="radar">Radar</button>
+        </div>
+        <div class="chart-wrap" style="height:200px;"><canvas id="todoChart" role="img" aria-label="To-do completion by subject">To-do completion by subject.</canvas></div>
+      </div>
+
+      <div class="section-card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad2)"></span>
+          Focus Session
+        </div>
+        <div class="clock-modes">
+          <button id="modeStopwatch" class="active">Stopwatch</button>
+          <button id="modeTimer">Timer</button>
+        </div>
+        <div class="timer-setup" id="timerSetup">
+          <label>Minutes:</label>
+          <input type="number" id="timerMinutes" value="25" min="1" max="180" />
+        </div>
+        <div class="clock-display">
+          <div class="time" id="clockDisplay">00:00:00</div>
+          <div class="status" id="clockStatus">Not started</div>
+        </div>
+        <div class="clock-btns">
+          <button id="clockStart" class="btn-clock-start">▶ Start</button>
+          <button id="clockPause" class="btn-clock-pause" style="display:none;">⏸ Pause</button>
+          <button id="clockFinish" class="btn-clock-finish" style="display:none;">Finish</button>
+          <button id="clockReset" class="btn-clock-reset" style="display:none;">↺</button>
+        </div>
+        <div style="border-top:1px solid var(--line);padding-top:0.9rem;">
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:0.5rem;">Today's sessions</div>
+          <div class="session-list" id="sessionList"></div>
+          <div class="focus-total">Total today: <b id="sessionTotal">0m</b></div>
+        </div>
+      </div>
+
+    </div>
   `;
 
   document.getElementById('logSessionBtn').addEventListener('click', () => openLogSessionModal(subjects));
 
   animateBars();
   buildCharts(subjects, progress, weeklyHours);
+  initTodos(subjects);
+  initFocusClock();
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1146,10 +1203,346 @@ function buildCharts(subjects, progress, weeklyHours) {
   }
 }
 
+// ════════════════════════════════════════════════════════════
+// TODO LIST
+// ════════════════════════════════════════════════════════════
+const SUBJ_COLORS_MAP = {};
+let TODOS = [];
+let TODO_CHART = null;
+let TODO_CHART_TYPE = 'doughnut';
+
+async function initTodos(subjects) {
+  subjects.forEach((s,i) => SUBJ_COLORS_MAP[s] = SUBJECT_COLORS[i % SUBJECT_COLORS.length]);
+
+  const sel = document.getElementById('todoSubject');
+  sel.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+
+  const { data, error } = await supabaseClient
+    .from('todos')
+    .select('*')
+    .eq('user_id', CURRENT_USER.id)
+    .order('created_at', { ascending: false });
+  TODOS = error ? [] : data;
+
+  renderTodos();
+  renderTodoChart(subjects);
+
+  document.getElementById('todoAdd').addEventListener('click', () => addTodo(subjects));
+  document.getElementById('todoText').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addTodo(subjects);
+  });
+  document.querySelectorAll('.chart-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      TODO_CHART_TYPE = btn.dataset.type;
+      renderTodoChart(subjects);
+    });
+  });
+}
+
+async function addTodo(subjects) {
+  const input = document.getElementById('todoText');
+  const sel = document.getElementById('todoSubject');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const newTodo = { user_id: CURRENT_USER.id, subject: sel.value, text, is_done: false };
+  const { data, error } = await supabaseClient.from('todos').insert(newTodo).select().single();
+  if (error) { console.error(error); alert('Could not add task.'); return; }
+
+  TODOS.unshift(data);
+  input.value = '';
+  renderTodos();
+  renderTodoChart(subjects);
+}
+
+function renderTodos() {
+  const list = document.getElementById('todoList');
+  const done = TODOS.filter(t => t.is_done).length;
+  document.getElementById('todoCount').textContent = `${done} of ${TODOS.length} done`;
+
+  if (!TODOS.length) {
+    list.innerHTML = `<div class="empty-note">No tasks yet — add your first one above.</div>`;
+    return;
+  }
+
+  list.innerHTML = TODOS.map(t => `
+    <div class="todo-item">
+      <input type="checkbox" ${t.is_done ? 'checked' : ''} data-id="${t.id}" class="todo-check" />
+      <span class="dot" style="background:${SUBJ_COLORS_MAP[t.subject] || '#888'}"></span>
+      <span class="txt ${t.is_done ? 'done' : ''}">${t.text}</span>
+      <span class="subj-tag">${t.subject}</span>
+      <button class="del-btn" data-id="${t.id}" aria-label="Delete task">✕</button>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.todo-check').forEach(cb => {
+    cb.addEventListener('change', async () => {
+      const id = parseInt(cb.dataset.id);
+      const todo = TODOS.find(t => t.id === id);
+      todo.is_done = cb.checked;
+      renderTodos();
+      const subjects = Object.keys(SUBJ_COLORS_MAP);
+      renderTodoChart(subjects);
+      await supabaseClient.from('todos').update({ is_done: cb.checked }).eq('id', id);
+    });
+  });
+  list.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = parseInt(btn.dataset.id);
+      TODOS = TODOS.filter(t => t.id !== id);
+      renderTodos();
+      const subjects = Object.keys(SUBJ_COLORS_MAP);
+      renderTodoChart(subjects);
+      await supabaseClient.from('todos').delete().eq('id', id);
+    });
+  });
+}
+
+function renderTodoChart(subjects) {
+  const ctx = document.getElementById('todoChart');
+  if (!ctx) return;
+  const data = subjects.map(s => {
+    const items = TODOS.filter(t => t.subject === s);
+    return items.length ? Math.round((items.filter(t => t.is_done).length / items.length) * 100) : 0;
+  });
+  const hexColors = subjects.map((_,i) => SUBJECT_COLORS[i % SUBJECT_COLORS.length]);
+  if (TODO_CHART) TODO_CHART.destroy();
+
+  let config;
+  if (TODO_CHART_TYPE === 'doughnut') {
+    config = {
+      type: 'doughnut',
+      data: { labels: subjects, datasets: [{ data, backgroundColor: hexColors, borderWidth: 0 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    };
+  } else if (TODO_CHART_TYPE === 'bar') {
+    config = {
+      type: 'bar',
+      data: { labels: subjects, datasets: [{ label: 'Completion %', data, backgroundColor: hexColors, borderRadius: 6 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 10 } }, grid: { display: false } },
+          y: { beginAtZero: true, max: 100, ticks: { color: 'rgba(255,255,255,0.45)', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.04)' } }
+        }
+      }
+    };
+  } else {
+    config = {
+      type: 'radar',
+      data: { labels: subjects, datasets: [{ label: 'Completion %', data, backgroundColor: 'rgba(108,92,231,0.2)', borderColor: '#A35CE7', pointBackgroundColor: '#F368B0' }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { r: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.07)' }, angleLines: { color: 'rgba(255,255,255,0.07)' }, ticks: { display: false }, pointLabels: { color: 'rgba(255,255,255,0.55)', font: { size: 10 } } } }
+      }
+    };
+  }
+  TODO_CHART = new Chart(ctx, config);
+}
+
+// ════════════════════════════════════════════════════════════
+// FOCUS STOPWATCH / TIMER — persists across tab close via active_session
+// ════════════════════════════════════════════════════════════
+let CLOCK_MODE = 'stopwatch';
+let CLOCK_RUNNING = false;
+let CLOCK_START_TS = null;
+let CLOCK_ELAPSED_BEFORE_PAUSE = 0;
+let CLOCK_TARGET_SECONDS = 25 * 60;
+let CLOCK_TICK = null;
+let TODAY_SESSIONS = [];
+
+function fmtClock(totalSeconds) {
+  totalSeconds = Math.max(0, Math.round(totalSeconds));
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  const pad = n => n < 10 ? '0'+n : ''+n;
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
+function currentClockElapsed() {
+  if (!CLOCK_RUNNING) return CLOCK_ELAPSED_BEFORE_PAUSE;
+  return CLOCK_ELAPSED_BEFORE_PAUSE + (Date.now() - CLOCK_START_TS) / 1000;
+}
+
+function updateClockDisplay() {
+  const el = document.getElementById('clockDisplay');
+  if (!el) return;
+  if (CLOCK_MODE === 'stopwatch') {
+    el.textContent = fmtClock(currentClockElapsed());
+  } else {
+    const remaining = CLOCK_TARGET_SECONDS - currentClockElapsed();
+    if (remaining <= 0) {
+      el.textContent = '00:00:00';
+      finishFocusSession(true);
+      return;
+    }
+    el.textContent = fmtClock(remaining);
+  }
+}
+
+function setClockButtons(state) {
+  const start = document.getElementById('clockStart');
+  const pause = document.getElementById('clockPause');
+  const finish = document.getElementById('clockFinish');
+  const reset = document.getElementById('clockReset');
+  if (state === 'idle') {
+    start.style.display = 'inline-block'; pause.style.display = 'none';
+    finish.style.display = 'none'; reset.style.display = 'none';
+  } else if (state === 'running') {
+    start.style.display = 'none'; pause.style.display = 'inline-block';
+    finish.style.display = 'inline-block'; reset.style.display = 'inline-block';
+  } else if (state === 'paused') {
+    start.style.display = 'inline-block'; pause.style.display = 'none';
+    finish.style.display = 'inline-block'; reset.style.display = 'inline-block';
+  }
+}
+
+async function initFocusClock() {
+  const { data: row } = await supabaseClient
+    .from('student_progress').select('active_session').eq('user_id', CURRENT_USER.id).maybeSingle();
+
+  if (row && row.active_session) {
+    const sess = row.active_session;
+    CLOCK_MODE = sess.mode;
+    CLOCK_TARGET_SECONDS = sess.target_seconds || 1500;
+    CLOCK_ELAPSED_BEFORE_PAUSE = sess.paused_elapsed || 0;
+    if (sess.running) {
+      CLOCK_RUNNING = true;
+      CLOCK_START_TS = new Date(sess.start_time).getTime();
+      document.getElementById('clockStatus').textContent = 'Resumed — was running in background';
+      setClockButtons('running');
+      CLOCK_TICK = setInterval(updateClockDisplay, 1000);
+    } else {
+      setClockButtons('paused');
+      document.getElementById('clockStatus').textContent = 'Paused';
+    }
+    if (CLOCK_MODE === 'timer') {
+      document.getElementById('modeTimer').classList.add('active');
+      document.getElementById('modeStopwatch').classList.remove('active');
+      document.getElementById('timerSetup').style.display = 'flex';
+      document.getElementById('timerMinutes').value = Math.round(CLOCK_TARGET_SECONDS / 60);
+    }
+  }
+  updateClockDisplay();
+  await loadTodaySessions();
+
+  document.getElementById('modeStopwatch').addEventListener('click', () => {
+    if (CLOCK_RUNNING) return;
+    CLOCK_MODE = 'stopwatch';
+    document.getElementById('modeStopwatch').classList.add('active');
+    document.getElementById('modeTimer').classList.remove('active');
+    document.getElementById('timerSetup').style.display = 'none';
+    document.getElementById('clockStatus').textContent = 'Not started';
+  });
+  document.getElementById('modeTimer').addEventListener('click', () => {
+    if (CLOCK_RUNNING) return;
+    CLOCK_MODE = 'timer';
+    document.getElementById('modeTimer').classList.add('active');
+    document.getElementById('modeStopwatch').classList.remove('active');
+    document.getElementById('timerSetup').style.display = 'flex';
+    CLOCK_TARGET_SECONDS = parseInt(document.getElementById('timerMinutes').value || 25) * 60;
+    document.getElementById('clockStatus').textContent = 'Not started';
+    updateClockDisplay();
+  });
+  document.getElementById('timerMinutes').addEventListener('input', function() {
+    if (!CLOCK_RUNNING) {
+      CLOCK_TARGET_SECONDS = parseInt(this.value || 25) * 60;
+      updateClockDisplay();
+    }
+  });
+
+  document.getElementById('clockStart').addEventListener('click', async () => {
+    CLOCK_RUNNING = true;
+    CLOCK_START_TS = Date.now();
+    document.getElementById('clockStatus').textContent = 'Running — saved if you close this tab';
+    setClockButtons('running');
+    CLOCK_TICK = setInterval(updateClockDisplay, 1000);
+    updateClockDisplay();
+    await saveActiveSession();
+  });
+  document.getElementById('clockPause').addEventListener('click', async () => {
+    CLOCK_ELAPSED_BEFORE_PAUSE = currentClockElapsed();
+    CLOCK_RUNNING = false;
+    clearInterval(CLOCK_TICK);
+    document.getElementById('clockStatus').textContent = 'Paused';
+    setClockButtons('paused');
+    await saveActiveSession();
+  });
+  document.getElementById('clockFinish').addEventListener('click', () => finishFocusSession(false));
+  document.getElementById('clockReset').addEventListener('click', async () => {
+    clearInterval(CLOCK_TICK);
+    CLOCK_RUNNING = false; CLOCK_ELAPSED_BEFORE_PAUSE = 0; CLOCK_START_TS = null;
+    document.getElementById('clockStatus').textContent = 'Not started';
+    setClockButtons('idle');
+    updateClockDisplay();
+    await supabaseClient.from('student_progress').update({ active_session: null }).eq('user_id', CURRENT_USER.id);
+  });
+}
+
+async function saveActiveSession() {
+  const payload = {
+    mode: CLOCK_MODE,
+    running: CLOCK_RUNNING,
+    start_time: CLOCK_RUNNING ? new Date(CLOCK_START_TS).toISOString() : null,
+    paused_elapsed: CLOCK_RUNNING ? 0 : CLOCK_ELAPSED_BEFORE_PAUSE,
+    target_seconds: CLOCK_TARGET_SECONDS,
+  };
+  await supabaseClient.from('student_progress').update({ active_session: payload }).eq('user_id', CURRENT_USER.id);
+}
+
+async function finishFocusSession(auto) {
+  if (!CLOCK_RUNNING && CLOCK_ELAPSED_BEFORE_PAUSE === 0) return;
+  clearInterval(CLOCK_TICK);
+  const seconds = CLOCK_MODE === 'timer' ? CLOCK_TARGET_SECONDS : Math.round(currentClockElapsed());
+
+  await supabaseClient.from('focus_sessions').insert({
+    user_id: CURRENT_USER.id,
+    mode: CLOCK_MODE,
+    seconds,
+    started_at: new Date(Date.now() - seconds*1000).toISOString(),
+  });
+  await supabaseClient.from('student_progress').update({ active_session: null }).eq('user_id', CURRENT_USER.id);
+
+  CLOCK_RUNNING = false; CLOCK_ELAPSED_BEFORE_PAUSE = 0; CLOCK_START_TS = null;
+  document.getElementById('clockStatus').textContent = auto ? 'Timer complete — session saved' : 'Session saved';
+  setClockButtons('idle');
+  updateClockDisplay();
+  await loadTodaySessions();
+}
+
+async function loadTodaySessions() {
+  const startOfDay = new Date(); startOfDay.setHours(0,0,0,0);
+  const { data } = await supabaseClient
+    .from('focus_sessions')
+    .select('*')
+    .eq('user_id', CURRENT_USER.id)
+    .gte('ended_at', startOfDay.toISOString())
+    .order('ended_at', { ascending: false });
+
+  TODAY_SESSIONS = data || [];
+  const list = document.getElementById('sessionList');
+  if (!list) return;
+
+  if (!TODAY_SESSIONS.length) {
+    list.innerHTML = `<div class="empty-note" style="padding:0.75rem 0;">No sessions yet today.</div>`;
+  } else {
+    list.innerHTML = TODAY_SESSIONS.map(s => `
+      <div class="session-row">
+        <span>${s.mode === 'timer' ? '⏳' : '⏱️'} ${s.mode}</span>
+        <span>${Math.round(s.seconds/60)}m</span>
+      </div>
+    `).join('');
+  }
+  const total = TODAY_SESSIONS.reduce((a,s) => a + s.seconds, 0);
+  document.getElementById('sessionTotal').textContent = `${Math.round(total/60)}m`;
+}
+
 renderDashboard();
 </script>
-  <!-- To do list  -->
-  
-  
 </body>
 </html>
