@@ -1085,7 +1085,7 @@ async function renderDashboard(skipAuthCheck) {
         </div>
         <div class="todo-row">
           <input type="text" id="todoText" placeholder="Add a task..." maxlength="100" />
-          <select id="todoSubject"></select>
+          <input type="text" id="todoSubject" placeholder="Subject" maxlength="30" style="width:130px;" />
           <button id="todoAdd" aria-label="Add task">+</button>
         </div>
         <div class="todo-list" id="todoList"></div>
@@ -1212,11 +1212,6 @@ let TODO_CHART = null;
 let TODO_CHART_TYPE = 'doughnut';
 
 async function initTodos(subjects) {
-  subjects.forEach((s,i) => SUBJ_COLORS_MAP[s] = SUBJECT_COLORS[i % SUBJECT_COLORS.length]);
-
-  const sel = document.getElementById('todoSubject');
-  sel.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
-
   const { data, error } = await supabaseClient
     .from('todos')
     .select('*')
@@ -1225,36 +1220,49 @@ async function initTodos(subjects) {
   TODOS = error ? [] : data;
 
   renderTodos();
-  renderTodoChart(subjects);
+  renderTodoChart();
 
-  document.getElementById('todoAdd').addEventListener('click', () => addTodo(subjects));
+  document.getElementById('todoAdd').addEventListener('click', () => addTodo());
   document.getElementById('todoText').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') addTodo(subjects);
+    if (e.key === 'Enter') addTodo();
+  });
+  document.getElementById('todoSubject').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addTodo();
   });
   document.querySelectorAll('.chart-type-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       TODO_CHART_TYPE = btn.dataset.type;
-      renderTodoChart(subjects);
+      renderTodoChart();
     });
   });
 }
 
-async function addTodo(subjects) {
+function getTodoSubjectColor(subject) {
+  if (!SUBJ_COLORS_MAP[subject]) {
+    const idx = Object.keys(SUBJ_COLORS_MAP).length;
+    SUBJ_COLORS_MAP[subject] = SUBJECT_COLORS[idx % SUBJECT_COLORS.length];
+  }
+  return SUBJ_COLORS_MAP[subject];
+}
+
+async function addTodo() {
   const input = document.getElementById('todoText');
-  const sel = document.getElementById('todoSubject');
   const text = input.value.trim();
   if (!text) return;
+  const subjEl = document.getElementById('todoSubject');
+  const subject = subjEl.value.trim() || 'General';
 
-  const newTodo = { user_id: CURRENT_USER.id, subject: sel.value, text, is_done: false };
+  const newTodo = { user_id: CURRENT_USER.id, subject, text, is_done: false };
   const { data, error } = await supabaseClient.from('todos').insert(newTodo).select().single();
   if (error) { console.error(error); alert('Could not add task.'); return; }
 
   TODOS.unshift(data);
   input.value = '';
+  subjEl.value = '';
   renderTodos();
-  renderTodoChart(subjects);
+  renderTodoChart();
 }
 
 function renderTodos() {
@@ -1270,7 +1278,7 @@ function renderTodos() {
   list.innerHTML = TODOS.map(t => `
     <div class="todo-item">
       <input type="checkbox" ${t.is_done ? 'checked' : ''} data-id="${t.id}" class="todo-check" />
-      <span class="dot" style="background:${SUBJ_COLORS_MAP[t.subject] || '#888'}"></span>
+      <span class="dot" style="background:${getTodoSubjectColor(t.subject)}"></span>
       <span class="txt ${t.is_done ? 'done' : ''}">${t.text}</span>
       <span class="subj-tag">${t.subject}</span>
       <button class="del-btn" data-id="${t.id}" aria-label="Delete task">✕</button>
@@ -1283,8 +1291,7 @@ function renderTodos() {
       const todo = TODOS.find(t => t.id === id);
       todo.is_done = cb.checked;
       renderTodos();
-      const subjects = Object.keys(SUBJ_COLORS_MAP);
-      renderTodoChart(subjects);
+      renderTodoChart();
       await supabaseClient.from('todos').update({ is_done: cb.checked }).eq('id', id);
     });
   });
@@ -1293,21 +1300,27 @@ function renderTodos() {
       const id = parseInt(btn.dataset.id);
       TODOS = TODOS.filter(t => t.id !== id);
       renderTodos();
-      const subjects = Object.keys(SUBJ_COLORS_MAP);
-      renderTodoChart(subjects);
+      renderTodoChart();
       await supabaseClient.from('todos').delete().eq('id', id);
     });
   });
 }
 
-function renderTodoChart(subjects) {
+function renderTodoChart() {
   const ctx = document.getElementById('todoChart');
   if (!ctx) return;
+  const subjects = [...new Set(TODOS.map(t => t.subject))];
+
+  if (!subjects.length) {
+    if (TODO_CHART) { TODO_CHART.destroy(); TODO_CHART = null; }
+    return;
+  }
+
   const data = subjects.map(s => {
     const items = TODOS.filter(t => t.subject === s);
     return items.length ? Math.round((items.filter(t => t.is_done).length / items.length) * 100) : 0;
   });
-  const hexColors = subjects.map((_,i) => SUBJECT_COLORS[i % SUBJECT_COLORS.length]);
+  const hexColors = subjects.map(s => getTodoSubjectColor(s));
   if (TODO_CHART) TODO_CHART.destroy();
 
   let config;
