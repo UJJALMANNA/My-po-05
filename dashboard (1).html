@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — UM.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --c1: #6C5CE7; --c2: #A35CE7; --c3: #F368B0; --c4: #FF9F5A; --c5: #4FD1C5;
+      --ink: #19182B; --ink-dim: #5B5874; --bg: #0D0B18; --surface: #13111F;
+      --surface2: #1C1930; --line: rgba(255,255,255,0.07);
+      --grad: linear-gradient(120deg,var(--c1),var(--c2) 50%,var(--c3));
+      --grad2: linear-gradient(120deg,var(--c3),var(--c4));
+      --grad3: linear-gradient(120deg,var(--c5),var(--c1));
+      --ff-display: 'Outfit',sans-serif;
+      --ff-body: 'Plus Jakarta Sans',sans-serif;
+      --ff-mono: 'JetBrains Mono',monospace;
+      --nav-h: 64px;
+      --r: 16px; --r-sm: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-body);
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ── BACKGROUND ORBS ── */
+    .orb {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px);
+      animation: orbFloat 18s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 500px; height: 500px; background: rgba(108,92,231,0.18); top: -100px; left: -150px; }
+    .orb2 { width: 400px; height: 400px; background: rgba(243,104,176,0.14); top: 30%; right: -100px; animation-delay: -6s; }
+    .orb3 { width: 350px; height: 350px; background: rgba(79,209,197,0.10); bottom: -80px; left: 30%; animation-delay: -12s; }
+    @keyframes orbFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,40px) scale(1.08); }
+    }
+
+    /* ── NAV ── */
+    @keyframes navIn { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes borderFlow {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    @keyframes shimmer {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(10,8,18,0.85);
+      backdrop-filter: blur(20px);
+      animation: navIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .nav::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px;
+      background: linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c1));
+      background-size: 300% 100%;
+      animation: borderFlow 5s linear infinite;
+    }
+    .nav__mark {
+      font-family: var(--ff-display); font-weight: 800; font-size: 1.3rem;
+      background: linear-gradient(90deg,#fff,var(--c2),var(--c3),#fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    .nav__mark-dot { color: var(--c4); -webkit-text-fill-color: var(--c4); }
+    .nav__right { display: flex; align-items: center; gap: 1rem; }
+    .nav__links { display: flex; gap: 0.2rem; align-items: center; }
+    .nav__links a {
+      color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 600;
+      padding: 0.45em 0.9em; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav__links a:hover, .nav__links a.active { color: #fff; background: rgba(255,255,255,0.08); }
+    .nav__user {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px; padding: 0.4em 1em;
+    }
+    .nav__user-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #fff;
+    }
+    .nav__user-name { font-size: 0.88rem; font-weight: 700; color: #fff; }
+    .nav__logout {
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.75); border-radius: 999px; padding: 0.4em 1em;
+      font-size: 0.85rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nav__logout:hover { border-color: var(--c3); color: var(--c3); }
+
+    /* ── MAIN LAYOUT ── */
+    .dash {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+      padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem;
+    }
+
+    /* ── WELCOME HERO ── */
+    .welcome {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 1.75rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+    .welcome::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg,rgba(108,92,231,0.1),rgba(243,104,176,0.06),transparent);
+      pointer-events: none;
+    }
+    .welcome__left { display: flex; align-items: center; gap: 1rem; }
+    .welcome__avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-display); font-size: 1.3rem; font-weight: 800; color: #fff;
+      flex-shrink: 0; box-shadow: 0 0 0 4px rgba(108,92,231,0.25);
+    }
+    .welcome__text h1 {
+      font-family: var(--ff-display); font-size: 1.5rem; font-weight: 800;
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .welcome__text p { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin-top: 0.2rem; }
+    .welcome__right { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .exam-pill {
+      background: rgba(108,92,231,0.15); border: 1px solid rgba(108,92,231,0.35);
+      border-radius: 999px; padding: 0.5em 1.2em;
+      font-family: var(--ff-mono); font-size: 0.82rem; font-weight: 700; color: #b3a8f7;
+    }
+    .countdown { text-align: center; }
+    .countdown__num {
+      font-family: var(--ff-display); font-size: 2.5rem; font-weight: 800; line-height: 1;
+      background: var(--grad2); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .countdown__label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; font-family: var(--ff-mono); }
+
+    /* ── STAT CARDS ── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 1.25rem 1.5rem; position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: fadeUp 0.5s ease both;
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .stat-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .stat-card:nth-child(1)::after { background: var(--grad); }
+    .stat-card:nth-child(2)::after { background: var(--grad2); }
+    .stat-card:nth-child(3)::after { background: var(--grad3); }
+    .stat-card:nth-child(4)::after { background: linear-gradient(90deg,var(--c4),var(--c3)); }
+    .stat-card__icon {
+      font-size: 1.4rem; margin-bottom: 0.75rem;
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stat-card:nth-child(1) .stat-card__icon { background: rgba(108,92,231,0.15); }
+    .stat-card:nth-child(2) .stat-card__icon { background: rgba(243,104,176,0.15); }
+    .stat-card:nth-child(3) .stat-card__icon { background: rgba(79,209,197,0.15); }
+    .stat-card:nth-child(4) .stat-card__icon { background: rgba(255,159,90,0.15); }
+    .stat-card__val {
+      font-family: var(--ff-display); font-size: 2rem; font-weight: 800; color: #fff; line-height: 1;
+    }
+    .stat-card__label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; font-weight: 600; }
+    .stat-card__sub { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.25rem; }
+
+    /* ── MID GRID ── */
+    .mid-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── CARD BASE ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 1.5rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .card__title {
+      font-family: var(--ff-display); font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,0.9); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .card__title-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── SUBJECT PROGRESS ── */
+    .subj-row {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem;
+    }
+    .subj-row:last-child { margin-bottom: 0; }
+    .subj-name { font-size: 0.85rem; color: rgba(255,255,255,0.75); width: 140px; flex-shrink: 0; font-weight: 500; }
+    .subj-bar-bg {
+      flex: 1; height: 6px; background: rgba(255,255,255,0.07);
+      border-radius: 999px; overflow: hidden;
+    }
+    .subj-bar-fill {
+      height: 100%; border-radius: 999px;
+      width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .subj-pct { font-family: var(--ff-mono); font-size: 0.78rem; color: rgba(255,255,255,0.5); width: 34px; text-align: right; }
+
+    /* ── STREAK ── */
+    .streak-center { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 0.6rem; padding: 0.5rem 0; }
+    @keyframes fireFlicker {
+      0%,100% { transform: scaleY(1) rotate(-2deg); }
+      50%      { transform: scaleY(1.08) rotate(2deg); }
+    }
+    .streak-fire { font-size: 3rem; animation: fireFlicker 1.2s ease-in-out infinite; display: inline-block; }
+    .streak-num {
+      font-family: var(--ff-display); font-size: 3.5rem; font-weight: 800; line-height: 1;
+      background: var(--grad2); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .streak-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+    .streak-days { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .day-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700;
+    }
+    .day-done   { background: rgba(108,92,231,0.25); color: #b3a8f7; border: 1px solid rgba(108,92,231,0.4); }
+    .day-miss   { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+    .day-today  { background: var(--grad); color: #fff; box-shadow: 0 0 12px rgba(108,92,231,0.5); }
+
+    /* ── CHARTS ── */
+    .charts-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .chart-wrap { position: relative; width: 100%; height: 220px; }
+
+    /* ── BOTTOM GRID ── */
+    .bottom-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+
+    /* ── ACTIVITY ── */
+    .activity-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--line);
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .act-icon {
+      width: 32px; height: 32px; border-radius: var(--r-sm); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .act-title { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 600; }
+    .act-time  { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+
+    /* ── GOALS ── */
+    .goal-item { margin-bottom: 1rem; }
+    .goal-item:last-child { margin-bottom: 0; }
+    .goal-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .goal-name { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+    .goal-val  { font-family: var(--ff-mono); font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+    .goal-bar-bg { height: 7px; background: rgba(255,255,255,0.07); border-radius: 999px; overflow: hidden; }
+    .goal-bar-fill { height: 100%; border-radius: 999px; width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .ai-tip {
+      margin-top: 1.2rem; padding: 0.9rem 1rem;
+      background: rgba(108,92,231,0.1); border: 1px solid rgba(108,92,231,0.25);
+      border-radius: var(--r-sm);
+    }
+    .ai-tip__label { font-size: 0.75rem; font-weight: 700; color: var(--c2); margin-bottom: 0.3rem; font-family: var(--ff-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+    .ai-tip__text  { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+    /* ── ONBOARDING (pick exam) ── */
+    .onboard {
+      max-width: 560px; margin: 4rem auto; text-align: center;
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 2.5rem 2rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .onboard h2 { font-family: var(--ff-display); font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .onboard p { color: rgba(255,255,255,0.55); margin-bottom: 1.75rem; font-size: 0.92rem; }
+    .onboard__row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; text-align: left; }
+    .onboard__field { flex: 1; min-width: 180px; }
+    .onboard__field label {
+      display: block; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.5);
+      margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .onboard__field select, .onboard__field input {
+      width: 100%; padding: 0.7em 0.9em; border-radius: var(--r-sm);
+      background: var(--surface2); border: 1px solid var(--line); color: #fff;
+      font-family: inherit; font-size: 0.92rem;
+    }
+    .onboard__field select:focus, .onboard__field input:focus { outline: none; border-color: var(--c1); }
+    .btn-primary {
+      background: var(--grad); color: #fff; border: none;
+      padding: 0.85em 2.2em; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ── LOG SESSION ── */
+    .btn-log {
+      background: rgba(108,92,231,0.15); border: 1px solid rgba(108,92,231,0.4);
+      color: #cabdfb; border-radius: 999px; padding: 0.55em 1.3em;
+      font-weight: 700; font-size: 0.85rem; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .btn-log:hover { background: rgba(108,92,231,0.25); transform: translateY(-2px); }
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1rem;
+      animation: fadeUp 0.25s ease both;
+    }
+    .modal {
+      background: var(--surface2); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 1.75rem; width: 100%; max-width: 420px;
+    }
+    .modal h3 { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 800; margin-bottom: 1.2rem; }
+    .modal__field { margin-bottom: 1rem; text-align: left; }
+    .modal__field label {
+      display: block; font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.5);
+      margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .modal__field select, .modal__field input {
+      width: 100%; padding: 0.65em 0.85em; border-radius: var(--r-sm);
+      background: var(--surface); border: 1px solid var(--line); color: #fff;
+      font-family: inherit; font-size: 0.9rem;
+    }
+    .modal__field select:focus, .modal__field input:focus { outline: none; border-color: var(--c1); }
+    .modal__actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; }
+    .btn-ghost {
+      background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
+      padding: 0.65em 1.4em; border-radius: 999px; font-weight: 600; font-size: 0.88rem; transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+    .empty-note {
+      text-align: center; padding: 1.5rem 1rem; color: rgba(255,255,255,0.35);
+      font-size: 0.85rem;
+    }
+
+    /* ── NOT LOGGED IN ── */
+    .not-logged {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 60vh; gap: 1rem; text-align: center;
+    }
+    .not-logged h2 { font-family: var(--ff-display); font-size: 1.8rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .not-logged p  { color: rgba(255,255,255,0.5); }
+    .btn-login {
+      background: var(--grad); color: #fff; border: none;
+      padding: 0.85em 2em; border-radius: 999px; font-weight: 700; font-size: 1rem;
+      margin-top: 0.5rem; transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-login:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+    /* ── NO PLAN ── */
+    .no-plan {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .no-plan h3 { font-family: var(--ff-display); font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+    .no-plan p  { color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
+    .btn-go {
+      display: inline-block; background: var(--grad); color: #fff;
+      padding: 0.75em 1.8em; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .btn-go:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+    /* ── LOADING ── */
+    .loading {
+      display: flex; align-items: center; justify-content: center; min-height: 60vh;
+      flex-direction: column; gap: 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 3px solid rgba(108,92,231,0.2);
+      border-top-color: var(--c1);
+      animation: spin 0.9s linear infinite;
+    }
+    .loading p { color: rgba(255,255,255,0.45); font-family: var(--ff-mono); font-size: 0.85rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .mid-grid, .charts-grid, .bottom-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .welcome { flex-direction: column; }
+      .nav__links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- background orbs -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav__mark">UM<span class="nav__mark-dot">.</span></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="index.html#gate">GATE</a>
+    <a href="index.html#news">Research</a>
+    <a href="planner.html">Planner</a>
+    <a href="blog.html">Blog</a>
+    <a href="dashboard.html" class="active">Dashboard</a>
+  </div>
+  <div class="nav__right" id="navRight">
+    <a href="auth.html" class="nav__logout">Login</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="dash" id="main">
+  <div class="loading" id="loadingState">
+    <div class="spinner"></div>
+    <p>Loading your dashboard…</p>
+  </div>
+</main>
+
+<script src="js/supabase-config.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════
+// EXAM DATA
+// ════════════════════════════════════════════════════════════
+const EXAM_SUBJECTS = {
+  GATE_CS:  ['Data Structures','Algorithms','OS','DBMS','Networks','Theory of Computation','Digital Logic','Maths'],
+  GATE_EC:  ['Control Systems','Signal Processing','Electromagnetics','Networks','Digital Circuits','Maths','Analog Circuits','Communications'],
+  JEE_MAIN: ['Physics','Chemistry','Mathematics'],
+  UPSC_CSE: ['General Studies I','General Studies II','General Studies III','Essay','Optional I','Optional II'],
+  CAT:      ['Quantitative Aptitude','Verbal Ability','Data Interpretation','Logical Reasoning'],
+};
+const EXAM_MONTHS = { GATE_CS:2, GATE_EC:2, JEE_MAIN:1, UPSC_CSE:6, CAT:11 };
+const EXAM_LABELS = { GATE_CS:'GATE CS', GATE_EC:'GATE EC', JEE_MAIN:'JEE Main', UPSC_CSE:'UPSC CSE', CAT:'CAT' };
+const SUBJECT_COLORS = ['#6C5CE7','#F368B0','#4FD1C5','#FF9F5A','#A35CE7','#00B894','#FDCB6E','#E17055'];
+const DAY_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']; // weekly_hours[0]=Mon ... [6]=Sun
+
+let CURRENT_USER = null;
+let CURRENT_ROW  = null; // current student_progress row, kept in memory after fetch
+
+// ════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════
+function daysLeft(examKey, year) {
+  const month = EXAM_MONTHS[examKey] || 2;
+  const examDate = new Date(year, month - 1, 15);
+  return Math.max(0, Math.floor((examDate - new Date()) / 86400000));
+}
+
+function getInitials(name) {
+  return name ? name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2) : 'ST';
+}
+
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function isoDaysAgo(n) {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function mondayIndexOf(date) {
+  // JS getDay(): 0=Sun..6=Sat. We want Mon=0..Sun=6
+  return (date.getDay() + 6) % 7;
+}
+
+function animateBars() {
+  setTimeout(() => {
+    document.querySelectorAll('.subj-bar-fill, .goal-bar-fill').forEach(el => {
+      el.style.width = el.dataset.width;
+    });
+  }, 100);
+}
+
+function timeAgo(isoString) {
+  const diffMs = Date.now() - new Date(isoString).getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins} min ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs} hr${hrs>1?'s':''} ago`;
+  const days = Math.floor(hrs / 24);
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return `${days} days ago`;
+  return new Date(isoString).toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+}
+
+function getAITip(subjects, progress, totalLogged) {
+  if (!totalLogged) {
+    return 'You haven\'t logged any study sessions yet. Log your first session to start tracking real progress.';
+  }
+  const weak = subjects.filter((_,i) => (progress[i]||0) < 50);
+  if (weak.length) return `Focus on <strong>${weak[0]}</strong> — you're below 50%. Spend 45 mins on it today.`;
+  const avg = progress.reduce((a,b)=>a+b,0)/progress.length;
+  if (avg > 75) return 'Great progress! Start taking full-length mock tests to simulate exam conditions.';
+  return 'Keep consistent — aim for at least 1 new topic per day and review yesterday\'s notes each morning.';
+}
+
+// ════════════════════════════════════════════════════════════
+// STREAK CALCULATION — based on real last_study_date
+// ════════════════════════════════════════════════════════════
+function computeLiveStreak(storedStreak, lastStudyDate) {
+  if (!lastStudyDate) return 0;
+  const today = todayISO();
+  const yesterday = isoDaysAgo(1);
+  if (lastStudyDate === today || lastStudyDate === yesterday) {
+    return storedStreak || 0;
+  }
+  // missed more than a day — streak is broken
+  return 0;
+}
+
+// ════════════════════════════════════════════════════════════
+// NAV
+// ════════════════════════════════════════════════════════════
+function updateNav(firstName) {
+  const navRight = document.getElementById('navRight');
+  if (firstName) {
+    navRight.innerHTML = `
+      <div class="nav__user">
+        <div class="nav__user-avatar">${getInitials(firstName)}</div>
+        <span class="nav__user-name">${firstName}</span>
+      </div>
+      <button class="nav__logout" id="logoutBtn">Logout</button>`;
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabaseClient.auth.signOut();
+      window.location.href = 'index.html';
+    });
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// ONBOARDING — shown when user has no student_progress row yet
+// ════════════════════════════════════════════════════════════
+function renderOnboarding(firstName) {
+  const main = document.getElementById('main');
+  const examOptions = Object.keys(EXAM_LABELS)
+    .map(k => `<option value="${k}">${EXAM_LABELS[k]}</option>`).join('');
+  const currentYear = new Date().getFullYear();
+  const yearOptions = Array.from({length:6}, (_,i) => currentYear+i)
+    .map(y => `<option value="${y}">${y}</option>`).join('');
+
+  main.innerHTML = `
+    <div class="onboard">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎯</div>
+      <h2>Hi ${firstName}, let's set up your dashboard</h2>
+      <p>Pick the exam you're preparing for. We'll start tracking your real progress from zero — no fake numbers.</p>
+      <div class="onboard__row">
+        <div class="onboard__field">
+          <label>Exam</label>
+          <select id="onbExam">${examOptions}</select>
+        </div>
+        <div class="onboard__field">
+          <label>Target Year</label>
+          <select id="onbYear">${yearOptions}</select>
+        </div>
+      </div>
+      <button class="btn-primary" id="onbSubmit">Create my dashboard</button>
+    </div>`;
+
+  document.getElementById('onbSubmit').addEventListener('click', async () => {
+    const btn = document.getElementById('onbSubmit');
+    btn.disabled = true; btn.textContent = 'Setting up…';
+    const examKey  = document.getElementById('onbExam').value;
+    const examYear = parseInt(document.getElementById('onbYear').value);
+    const subjectCount = (EXAM_SUBJECTS[examKey]||[]).length;
+
+    const newRow = {
+      user_id: CURRENT_USER.id,
+      exam_key: examKey,
+      exam_year: examYear,
+      subject_progress: Array(subjectCount).fill(0),
+      streak: 0,
+      last_study_date: null,
+      weekly_hours: [0,0,0,0,0,0,0],
+      total_hours: 0,
+    };
+
+    try {
+      const { error } = await supabaseClient.from('student_progress').insert(newRow);
+      if (error) throw error;
+      CURRENT_ROW = newRow;
+      await renderDashboard(true);
+    } catch (e) {
+      console.error(e);
+      btn.disabled = false; btn.textContent = 'Create my dashboard';
+      alert('Could not save your selection. Please try again.');
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// LOG STUDY SESSION MODAL
+// ════════════════════════════════════════════════════════════
+function openLogSessionModal(subjects) {
+  const subjectOptions = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+  const backdrop = document.createElement('div');
+  backdrop.className = 'modal-backdrop';
+  backdrop.innerHTML = `
+    <div class="modal">
+      <h3>📖 Log a study session</h3>
+      <div class="modal__field">
+        <label>Subject</label>
+        <select id="logSubject">${subjectOptions}</select>
+      </div>
+      <div class="modal__field">
+        <label>Minutes studied</label>
+        <input type="number" id="logMinutes" min="5" max="600" step="5" value="30" />
+      </div>
+      <div class="modal__field">
+        <label>Note (optional)</label>
+        <input type="text" id="logNote" placeholder="e.g. Finished chapter 3" maxlength="80" />
+      </div>
+      <div class="modal__actions">
+        <button class="btn-ghost" id="logCancel">Cancel</button>
+        <button class="btn-primary" id="logSave">Save session</button>
+      </div>
+    </div>`;
+  document.body.appendChild(backdrop);
+
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.remove(); });
+  document.getElementById('logCancel').addEventListener('click', () => backdrop.remove());
+  document.getElementById('logSave').addEventListener('click', async () => {
+    const subject = document.getElementById('logSubject').value;
+    const minutes = parseInt(document.getElementById('logMinutes').value);
+    const note    = document.getElementById('logNote').value.trim();
+    if (!minutes || minutes < 1) { alert('Enter a valid number of minutes.'); return; }
+
+    const saveBtn = document.getElementById('logSave');
+    saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+
+    try {
+      await saveStudySession(subject, minutes, note);
+      backdrop.remove();
+      await renderDashboard(true);
+    } catch (e) {
+      console.error(e);
+      saveBtn.disabled = false; saveBtn.textContent = 'Save session';
+      alert('Could not save session. Please try again.');
+    }
+  });
+}
+
+async function saveStudySession(subject, minutes, note) {
+  const row = CURRENT_ROW;
+  const subjects = EXAM_SUBJECTS[row.exam_key] || [];
+  const subjIdx = subjects.indexOf(subject);
+
+  // 1) Insert the session record (real activity feed)
+  const { error: sessErr } = await supabaseClient.from('study_sessions').insert({
+    user_id: CURRENT_USER.id,
+    subject,
+    minutes,
+    note: note || null,
+  });
+  if (sessErr) throw sessErr;
+
+  // 2) Update subject_progress (cap at 100, +2% per 30 mins studied as a simple realistic model)
+  const progress = [...(row.subject_progress || Array(subjects.length).fill(0))];
+  if (subjIdx >= 0) {
+    const gain = Math.round((minutes / 30) * 2);
+    progress[subjIdx] = Math.min(100, (progress[subjIdx]||0) + gain);
+  }
+
+  // 3) Update weekly_hours for today's slot
+  const weeklyHours = [...(row.weekly_hours || [0,0,0,0,0,0,0])];
+  const todayIdx = mondayIndexOf(new Date());
+  weeklyHours[todayIdx] = Math.round(((weeklyHours[todayIdx]||0) + minutes/60) * 100) / 100;
+
+  // 4) Update streak based on last_study_date
+  const today = todayISO();
+  const yesterday = isoDaysAgo(1);
+  let streak = row.streak || 0;
+  if (row.last_study_date === today) {
+    // already studied today, streak unchanged
+  } else if (row.last_study_date === yesterday) {
+    streak += 1;
+  } else {
+    streak = 1; // broken streak, restart
+  }
+
+  // 5) Update total_hours
+  const totalHours = Math.round(((row.total_hours || 0) + minutes/60) * 100) / 100;
+
+  const updates = {
+    subject_progress: progress,
+    weekly_hours: weeklyHours,
+    streak,
+    last_study_date: today,
+    total_hours: totalHours,
+  };
+
+  const { error: updErr } = await supabaseClient
+    .from('student_progress')
+    .update(updates)
+    .eq('user_id', CURRENT_USER.id);
+  if (updErr) throw updErr;
+
+  Object.assign(CURRENT_ROW, updates);
+}
+
+// ════════════════════════════════════════════════════════════
+// MAIN RENDER
+// ════════════════════════════════════════════════════════════
+async function renderDashboard(skipAuthCheck) {
+  const main = document.getElementById('main');
+
+  if (!skipAuthCheck) {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+      main.innerHTML = `
+        <div class="not-logged">
+          <div style="font-size:3rem">📊</div>
+          <h2>Your dashboard awaits</h2>
+          <p>Log in to see your personalised progress, streak, and AI tips.</p>
+          <a href="auth.html" class="btn-login">Log in</a>
+        </div>`;
+      updateNav(null);
+      return;
+    }
+    CURRENT_USER = session.user;
+  }
+
+  const user = CURRENT_USER;
+  const firstName = user.user_metadata?.full_name?.split(' ')[0]
+    || user.user_metadata?.name?.split(' ')[0]
+    || user.email?.split('@')[0]
+    || 'Student';
+
+  updateNav(firstName);
+
+  // Fetch this user's real row from Supabase
+  let row = CURRENT_ROW;
+  if (!row) {
+    try {
+      const { data, error } = await supabaseClient
+        .from('student_progress')
+        .select('*')
+        .eq('user_id', user.id)
+        .maybeSingle();
+      if (error) throw error;
+      row = data;
+    } catch (e) {
+      console.error('Failed to load progress:', e);
+      main.innerHTML = `<div class="no-plan"><h3>Couldn't load your dashboard</h3><p>Please refresh the page. If this keeps happening, contact support.</p></div>`;
+      return;
+    }
+  }
+
+  // NEW USER — no row yet → onboarding (pick exam + year), all-zero start
+  if (!row) {
+    renderOnboarding(firstName);
+    return;
+  }
+  CURRENT_ROW = row;
+
+  const examKey  = row.exam_key;
+  const examYear = row.exam_year;
+  const subjects = EXAM_SUBJECTS[examKey] || EXAM_SUBJECTS.GATE_CS;
+  const progress = subjects.map((_, i) => row.subject_progress?.[i] ?? 0);
+
+  const days     = daysLeft(examKey, examYear);
+  const done     = progress.filter(p => p >= 100).length;
+  const avgScore = progress.length ? Math.round(progress.reduce((a,b)=>a+b,0)/progress.length) : 0;
+  const streak   = computeLiveStreak(row.streak, row.last_study_date);
+  const weeklyHours = (row.weekly_hours && row.weekly_hours.length === 7) ? row.weekly_hours : [0,0,0,0,0,0,0];
+  const totalLogged = (row.total_hours || 0) > 0;
+
+  const today = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const initials = getInitials(firstName);
+
+  // Streak day-dots — based on real last_study_date, not random
+  const dayShort = ['S','M','T','W','T','F','S'];
+  const todayJsIdx = new Date().getDay(); // 0=Sun
+  const streakDots = dayShort.map((d, i) => {
+    const diffFromToday = (todayJsIdx - i + 7) % 7; // 0 = today, 1 = yesterday, etc.
+    let cls = 'day-miss';
+    if (diffFromToday === 0) cls = 'day-today';
+    else if (streak > 0 && diffFromToday <= streak) cls = 'day-done';
+    return `<div class="day-dot ${cls}">${d}</div>`;
+  }).join('');
+
+  // Fetch real recent activity from study_sessions
+  let recentSessions = [];
+  try {
+    const { data } = await supabaseClient
+      .from('study_sessions')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(4);
+    recentSessions = data || [];
+  } catch (e) { console.error('Failed to load sessions:', e); }
+
+  const activityHtml = recentSessions.length
+    ? recentSessions.map(s => `
+        <div class="activity-item">
+          <div class="act-icon" style="background:rgba(108,92,231,0.2)">📖</div>
+          <div>
+            <div class="act-title">${s.subject} — ${s.minutes} min${s.note ? ' · ' + s.note : ''}</div>
+            <div class="act-time">${timeAgo(s.created_at)}</div>
+          </div>
+        </div>`).join('')
+    : `<div class="empty-note">No study sessions logged yet. Click "Log Session" to add your first one.</div>`;
+
+  // Today's goals — derived from real weekly_hours for today, real progress, real session count today
+  const todayIdx = mondayIndexOf(new Date());
+  const todayHours = weeklyHours[todayIdx] || 0;
+  const hoursGoal = 3;
+  const hoursPct = Math.min(100, Math.round((todayHours / hoursGoal) * 100));
+
+  main.innerHTML = `
+    <!-- WELCOME -->
+    <div class="welcome">
+      <div class="welcome__left">
+        <div class="welcome__avatar">${initials}</div>
+        <div class="welcome__text">
+          <h1>Welcome back, ${firstName}! 👋</h1>
+          <p>${today}</p>
+        </div>
+      </div>
+      <div class="welcome__right">
+        <div class="exam-pill">📡 ${EXAM_LABELS[examKey]||examKey} ${examYear}</div>
+        <div class="countdown">
+          <div class="countdown__num">${days}</div>
+          <div class="countdown__label">days left</div>
+        </div>
+        <button class="btn-log" id="logSessionBtn">+ Log Session</button>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__icon">✅</div>
+        <div class="stat-card__val">${done}</div>
+        <div class="stat-card__label">Topics Mastered</div>
+        <div class="stat-card__sub">of ${subjects.length} subjects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon">📝</div>
+        <div class="stat-card__val">${avgScore}%</div>
+        <div class="stat-card__label">Average Progress</div>
+        <div class="stat-card__sub">across all subjects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon">⏱️</div>
+        <div class="stat-card__val">${weeklyHours.reduce((a,b)=>a+b,0).toFixed(1)}</div>
+        <div class="stat-card__label">Hours This Week</div>
+        <div class="stat-card__sub">goal: 21 hrs/week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon">🔥</div>
+        <div class="stat-card__val">${streak}</div>
+        <div class="stat-card__label">Day Streak</div>
+        <div class="stat-card__sub">${streak > 0 ? 'keep it going!' : 'log a session to start'}</div>
+      </div>
+    </div>
+
+    <!-- MID: SUBJECT PROGRESS + STREAK -->
+    <div class="mid-grid">
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad)"></span>
+          Subject-wise Progress
+        </div>
+        ${subjects.map((s,i) => `
+          <div class="subj-row">
+            <div class="subj-name">${s}</div>
+            <div class="subj-bar-bg">
+              <div class="subj-bar-fill" data-width="${progress[i]}%"
+                style="background:${SUBJECT_COLORS[i%SUBJECT_COLORS.length]}"></div>
+            </div>
+            <div class="subj-pct">${progress[i]}%</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad2)"></span>
+          Study Streak
+        </div>
+        <div class="streak-center">
+          <div class="streak-fire">🔥</div>
+          <div class="streak-num">${streak}</div>
+          <div class="streak-label">days in a row</div>
+          <div class="streak-days">${streakDots}</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);margin-top:0.5rem;text-align:center">
+            ${streak > 0 ? "Don't break the chain!" : 'Log a session today to start your streak'}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="charts-grid">
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad3)"></span>
+          Weekly Study Hours
+        </div>
+        <div class="chart-wrap"><canvas id="hoursChart" role="img" aria-label="Bar chart of weekly study hours">Weekly study hours Mon–Sun.</canvas></div>
+      </div>
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad)"></span>
+          Subject Coverage
+        </div>
+        <div class="chart-wrap"><canvas id="radarChart" role="img" aria-label="Radar chart of subject coverage">Subject coverage across all topics.</canvas></div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: ACTIVITY + GOALS -->
+    <div class="bottom-grid">
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad2)"></span>
+          Recent Activity
+        </div>
+        ${activityHtml}
+      </div>
+
+      <div class="card">
+        <div class="card__title">
+          <span class="card__title-dot" style="background:var(--grad3)"></span>
+          Today's Goals
+        </div>
+        <div class="goal-item">
+          <div class="goal-top">
+            <span class="goal-name">Study hours</span>
+            <span class="goal-val">${todayHours.toFixed(1)} / ${hoursGoal} hrs</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" data-width="${hoursPct}%" style="background:linear-gradient(90deg,var(--c1),var(--c2))"></div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-top">
+            <span class="goal-name">Topics mastered</span>
+            <span class="goal-val">${done} / ${subjects.length}</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" data-width="${subjects.length ? Math.round((done/subjects.length)*100) : 0}%" style="background:linear-gradient(90deg,var(--c5),var(--c1))"></div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-top">
+            <span class="goal-name">Overall progress</span>
+            <span class="goal-val">${avgScore}%</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" data-width="${avgScore}%" style="background:linear-gradient(90deg,var(--c3),var(--c4))"></div>
+          </div>
+        </div>
+        <div class="ai-tip">
+          <div class="ai-tip__label">✦ AI tip for today</div>
+          <div class="ai-tip__text">${getAITip(subjects, progress, totalLogged)}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('logSessionBtn').addEventListener('click', () => openLogSessionModal(subjects));
+
+  animateBars();
+  buildCharts(subjects, progress, weeklyHours);
+}
+
+// ════════════════════════════════════════════════════════════
+// CHARTS
+// ════════════════════════════════════════════════════════════
+function buildCharts(subjects, progress, weeklyHours) {
+  const hoursCtx = document.getElementById('hoursChart');
+  if (hoursCtx) {
+    const todayIdx = mondayIndexOf(new Date());
+    new Chart(hoursCtx, {
+      type: 'bar',
+      data: {
+        labels: DAY_NAMES,
+        datasets: [{
+          label: 'Hours',
+          data: weeklyHours,
+          backgroundColor: weeklyHours.map((_,i) =>
+            i === todayIdx ? 'rgba(108,92,231,0.9)' : 'rgba(108,92,231,0.35)'),
+          borderRadius: 8,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } } },
+          y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 }, callback: v => v+'h' }, beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  const radarCtx = document.getElementById('radarChart');
+  if (radarCtx) {
+    new Chart(radarCtx, {
+      type: 'radar',
+      data: {
+        labels: subjects.map(s => s.length > 12 ? s.slice(0,12)+'…' : s),
+        datasets: [{
+          label: 'Progress %',
+          data: progress,
+          backgroundColor: 'rgba(108,92,231,0.2)',
+          borderColor: 'rgba(163,92,231,0.8)',
+          borderWidth: 2,
+          pointBackgroundColor: '#F368B0',
+          pointBorderColor: '#fff',
+          pointRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            grid:        { color: 'rgba(255,255,255,0.07)' },
+            angleLines:  { color: 'rgba(255,255,255,0.07)' },
+            ticks:       { display: false },
+            pointLabels: { color: 'rgba(255,255,255,0.55)', font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+}
+
+renderDashboard();
+</script>
+</body>
+</html>
