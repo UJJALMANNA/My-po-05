@@ -42,41 +42,6 @@
   --shadow-sm: 0 4px 16px rgba(108, 92, 231, 0.08);
   --shadow-md: 0 12px 32px rgba(108, 92, 231, 0.14);
   --shadow-lg: 0 24px 60px rgba(108, 92, 231, 0.18);
-
-  /* Used directly in the hero SVG diagram */
-  --signal: var(--c-indigo);
-  --amber:  var(--c-orange);
-}
-
-/* ===========================================================
-   DARK THEME — toggled via [data-theme="dark"] on <html>
-   =========================================================== */
-[data-theme="dark"] {
-  --bg:          #0D0B18;
-  --bg-soft:     #1C1930;
-  --surface:     #13111F;
-  --ink:         #F2F0FA;
-  --ink-dim:     #A8A4C0;
-  --line:        rgba(255,255,255,0.08);
-
-  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
-}
-[data-theme="dark"] .grain {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(108,92,231,0.22), transparent 38%),
-    radial-gradient(circle at 88% 18%, rgba(243,104,176,0.18), transparent 40%),
-    radial-gradient(circle at 25% 80%, rgba(79,209,197,0.16), transparent 35%),
-    radial-gradient(circle at 90% 85%, rgba(255,159,90,0.16), transparent 38%);
-}
-[data-theme="dark"] .nav {
-  background: rgba(13, 11, 24, 0.8);
-}
-[data-theme="dark"] .form__row input,
-[data-theme="dark"] .form__row select,
-[data-theme="dark"] .form__row textarea {
-  background: var(--surface);
 }
 
 /* ===========================================================
@@ -498,26 +463,4 @@ button { font-family: inherit; cursor: pointer; }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ===========================================================
-   THEME TOGGLE
-   =========================================================== */
-.theme-toggle {
-  position: fixed; left: 18px; top: 50%; transform: translateY(-50%);
-  z-index: 999;
-  display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: var(--surface); border: 1px solid var(--line);
-  color: var(--ink); font-size: 1.15rem;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-.theme-toggle:hover { border-color: var(--c-indigo); transform: translateY(-50%) scale(1.08); }
-.theme-toggle .icon-dark { display: none; }
-[data-theme="dark"] .theme-toggle .icon-light { display: none; }
-[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
-
-@media (max-width: 600px) {
-  .theme-toggle { left: 10px; width: 38px; height: 38px; font-size: 1rem; }
 }
