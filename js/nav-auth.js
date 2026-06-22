@@ -1,63 +1,67 @@
 // ============================================================
 // nav-auth.js
-// Drop this on EVERY page (public + protected), after supabase-config.js
-// Controls 3 nav elements based on login state:
-//   1. #loginDropdown   -> hidden when logged in
-//   2. #userInfo        -> shown when logged in, displays user's name/email
-//   3. #navAuthSlot      -> shows Logout button when logged in
 // ============================================================
 
 (async function updateNavAuthState() {
   const { data: { session } } = await supabaseClient.auth.getSession();
 
-  const loginDropdown = document.getElementById("loginDropdown");
-  const userInfo = document.getElementById("userInfo");
-  const userNameDisplay = document.getElementById("userNameDisplay");
-  const navAuthSlot = document.getElementById("navAuthSlot");
+  const loginDropdown  = document.getElementById("loginDropdown");
+  const userInfo       = document.getElementById("userInfo");
+  const userNameDisplay= document.getElementById("userNameDisplay");
+  const profileToggle  = document.getElementById("profileToggle");
+  const profileMenu    = document.getElementById("profileMenu");
+  const logoutBtn      = document.getElementById("logoutBtn");
 
   if (session) {
-    // ----- LOGGED IN -----
+    // ── LOGGED IN ──
 
-    // Hide the Login dropdown
-    if (loginDropdown) {
-      loginDropdown.style.display = "none";
+    // 1. Hide Login dropdown
+    if (loginDropdown) loginDropdown.style.display = "none";
+
+    // 2. Show user profile pill with name
+    if (userInfo && userNameDisplay) {
+      const rawName   = session.user.user_metadata?.full_name
+                     || session.user.user_metadata?.name
+                     || session.user.email.split("@")[0];
+      const firstName = rawName.split(" ")[0];
+      userNameDisplay.textContent = firstName;
+      userInfo.style.display = "flex";
     }
 
-   
-  
-// Show the username (use part before @ in email as display name)
-if (userInfo && userNameDisplay) {
-  const displayName = session.user.email.split("@")[0];
-  userNameDisplay.textContent = displayName;
-  userInfo.style.display = "flex";
-}
-    
+    // 3. Wire up dropdown toggle click
+    if (profileToggle && profileMenu) {
+      profileToggle.style.cursor = "pointer";
 
-    // Put a single Logout button in navAuthSlot
-    if (navAuthSlot) {
-      navAuthSlot.innerHTML = `<button id="logoutBtn" class="auth-btn">Logout</button>`;
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
+      profileToggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        profileMenu.classList.toggle("is-open");
+        profileToggle.classList.toggle("is-open");
+      });
+
+      // Close when clicking anywhere outside
+      document.addEventListener("click", function () {
+        profileMenu.classList.remove("is-open");
+        profileToggle.classList.remove("is-open");
+      });
+
+      // Stop menu clicks from closing it immediately
+      profileMenu.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    // 4. Wire up Logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
         await supabaseClient.auth.signOut();
         window.location.href = "index.html";
       });
     }
 
   } else {
-    // ----- LOGGED OUT -----
-
-    // Show the Login dropdown
-    if (loginDropdown) {
-      loginDropdown.style.display = "";
-    }
-
-    // Hide the username
-    if (userInfo) {
-      userInfo.style.display = "none";
-    }
-
-    // Clear navAuthSlot (no Logout button when logged out)
-    if (navAuthSlot) {
-      navAuthSlot.innerHTML = "";
-    }
+    // ── LOGGED OUT ──
+    if (loginDropdown) loginDropdown.style.display = "";
+    if (userInfo)      userInfo.style.display = "none";
   }
 })();
