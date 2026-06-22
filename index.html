@@ -365,5 +365,63 @@
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
   });
 </script>
+  <!-- Updating Mobile login  -->
+  <script>
+  const navToggle = document.getElementById('navToggle');
+  const navClose = document.getElementById('navClose');
+  const navLinks = document.getElementById('navLinks');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    navLinks.classList.add('is-open');
+    navOverlay.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    navLinks.classList.remove('is-open');
+    navOverlay.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  navToggle.addEventListener('click', openMenu);
+  navClose.addEventListener('click', closeMenu);
+  navOverlay.addEventListener('click', closeMenu);
+
+  /* Close menu when any link is clicked */
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  /* Login dropdown */
+  const loginDropdown = document.getElementById('loginDropdown');
+  if (loginDropdown) {
+    loginDropdown.querySelector('.nav__dropbtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      loginDropdown.classList.toggle('is-open');
+    });
+  }
+
+  /* Profile dropdown */
+  const profileToggle = document.getElementById('profileToggle');
+  const profileDropdown = document.getElementById('userInfo');
+  if (profileToggle) {
+    profileToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('is-open');
+    });
+  }
+
+  /* Close dropdowns on outside click */
+  document.addEventListener('click', function() {
+    if (loginDropdown) loginDropdown.classList.remove('is-open');
+    if (profileDropdown) profileDropdown.classList.remove('is-open');
+  });
+
+  /* Active tab highlight */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav__tab').forEach(link => {
+    if (link.getAttribute('href') === currentPage) link.classList.add('active');
+  });
+</script>
 </body>
 </html>
