@@ -694,8 +694,21 @@ button { font-family: inherit; cursor: pointer; }
 .nav__mobile-login a:hover { color: #FFE8F3; }
 
 @media (max-width: 900px) {
-  .nav__close { display: flex; }
-  .nav__mobile-login { display: flex; }
+  .nav__right { display: none; }
+  .nav__close { display: flex !important; }
+  .nav__mobile-login { display: flex !important; }
+  .nav__dropdown-content {
+    position: fixed;
+    left: 1rem; right: 1rem;
+    top: 4rem;
+    width: auto; min-width: unset;
+  }
+  .nav__profile-menu {
+    position: fixed;
+    left: 1rem; right: 1rem;
+    top: 4rem;
+    width: auto; min-width: unset;
+  }
 }
 @media (max-width: 900px) {
   .nav__right {
