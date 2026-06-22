@@ -127,3 +127,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 });
+// ── Login dropdown toggle ──
+const loginDropBtn = document.querySelector('#loginDropdown .nav__dropbtn');
+const loginContent = document.querySelector('#loginDropdown .nav__dropdown-content');
+
+if (loginDropBtn && loginContent) {
+  loginDropBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    loginContent.classList.toggle('is-open');
+  });
+
+  document.addEventListener('click', function() {
+    loginContent.classList.remove('is-open');
+  });
+}
