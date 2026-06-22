@@ -2,14 +2,15 @@
    DESIGN TOKENS — Modern, colorful, gradient-driven theme
    =========================================================== */
 :root {
+ :root {
+ :root {
   /* Base */
-  --bg:          #FAFAFC;
-  --bg-soft:     #F2F0FA;
-  --surface:     #FFFFFF;
-  --ink:         #19182B;
-  --ink-dim:     #5B5874;
-  --line:        #E7E4F2;
-
+  --bg:          #0E0D1A;
+  --bg-soft:     #1A1830;
+  --surface:     #1E1C32;
+  --ink:         #F0EEFF;
+  --ink-dim:     #9E9BB8;
+  --line:        #2E2B4A;
   /* Gradient palette */
   --c-indigo:    #6C5CE7;
   --c-violet:    #A35CE7;
@@ -51,7 +52,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--bg);
+  background: #0E0D1A;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 17px;
