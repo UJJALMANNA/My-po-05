@@ -645,3 +645,62 @@ button { font-family: inherit; cursor: pointer; }
   color: rgba(255,255,255,0.4);
   font-style: italic;
 }
+/* ===========================================================
+   DARK THEME — Hero + About sections only
+   =========================================================== */
+
+/* Dark Hero */
+.hero {
+  --bg:        #0E0D1A;
+  --bg-soft:   #1A1830;
+  --surface:   #1E1C32;
+  --ink:       #F0EEFF;
+  --ink-dim:   #9E9BB8;
+  --line:      #2E2B4A;
+  background: #0E0D1A;
+  color: #F0EEFF;
+}
+
+/* Dark About */
+.about {
+  --bg:        #0E0D1A;
+  --bg-soft:   #1A1830;
+  --surface:   #1E1C32;
+  --ink:       #F0EEFF;
+  --ink-dim:   #9E9BB8;
+  --line:      #2E2B4A;
+  background: #0E0D1A;
+  color: #F0EEFF;
+}
+
+/* Stat cards inside dark hero */
+.hero .stat {
+  background: #1E1C32;
+  border-color: #2E2B4A;
+}
+
+/* Ghost button inside dark hero */
+.hero .btn--ghost {
+  background: #1E1C32;
+  border-color: #2E2B4A;
+  color: #F0EEFF;
+}
+.hero .btn--ghost:hover {
+  border-color: var(--c-indigo);
+  color: var(--c-indigo);
+}
+
+/* About card inside dark about section */
+.about .about__card {
+  background: #1E1C32;
+  border-color: #2E2B4A;
+}
+.about .record__row {
+  border-color: #2E2B4A;
+}
+.about .record dt { color: #9E9BB8; }
+.about .record dd { color: #F0EEFF; }
+
+/* About text */
+.about .about__lead { color: #F0EEFF; }
+.about .about__text p { color: #9E9BB8; }
