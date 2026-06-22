@@ -544,3 +544,104 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+/*For Design   */
+/* ============ REDESIGNED ACADEMIC CARD ============ */
+.about__card--redesigned {
+  background: linear-gradient(135deg, rgba(108,92,231,0.08), rgba(243,104,176,0.05));
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.acard__header {
+  padding: 1.4rem 1.6rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+
+.acard__badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #a78bfa;
+  background: rgba(167,139,250,0.12);
+  padding: 0.25em 0.8em;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  display: inline-block;
+  margin-bottom: 0.6em;
+}
+
+.acard__title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.2em;
+}
+
+.acard__sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+.acard__items {
+  padding: 0.6rem 0;
+}
+
+.acard__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s ease;
+}
+
+.acard__item:last-child { border-bottom: none; }
+
+.acard__item:hover {
+  background: rgba(167,139,250,0.06);
+}
+
+.acard__icon {
+  font-size: 1.1rem;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.acard__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.acard__label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.acard__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+
+.acard__value--highlight {
+  color: #a78bfa;
+  font-weight: 800;
+}
+
+.acard__footer {
+  padding: 0.9rem 1.6rem;
+  background: rgba(167,139,250,0.06);
+  border-top: 1px solid rgba(167,139,250,0.1);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+}
