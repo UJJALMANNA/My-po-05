@@ -304,5 +304,16 @@
     html.setAttribute('data-theme', isDark ? 'light' : 'dark');
   });
 </script>
+  <!--  Addding for Login Dropdown  -->
+  <script>
+  const loginDropdown = document.getElementById('loginDropdown');
+  loginDropdown.querySelector('.nav__dropbtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    loginDropdown.classList.toggle('is-open');
+  });
+  document.addEventListener('click', function() {
+    loginDropdown.classList.remove('is-open');
+  });
+</script>
 </body>
 </html>
