@@ -24,20 +24,12 @@
       --nav-h: 64px;
       --r: 16px; --r-sm: 10px;
     }
-
-    [data-theme="light"] {
-      --ink: #19182B; --ink-dim: #5B5874; --bg: #FAFAFC; --surface: #FFFFFF;
-      --surface2: #F2F0FA; --line: rgba(20,15,40,0.1);
-    }
-    [data-theme="light"] body { color: var(--ink); }
-    [data-theme="light"] .nav { background: rgba(250,250,252,0.85); }
-    [data-theme="light"] .orb { opacity: 0.5; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--ff-body);
       background: var(--bg);
-      color: var(--ink);
+      color: #fff;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -95,14 +87,14 @@
     .nav__right { display: flex; align-items: center; gap: 1rem; }
     .nav__links { display: flex; gap: 0.2rem; align-items: center; }
     .nav__links a {
-      color: var(--ink); opacity: 0.7; font-size: 0.88rem; font-weight: 600;
+      color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 600;
       padding: 0.45em 0.9em; border-radius: 8px;
-      transition: color 0.2s, background 0.2s, opacity 0.2s;
+      transition: color 0.2s, background 0.2s;
     }
-    .nav__links a:hover, .nav__links a.active { opacity: 1; background: rgba(108,92,231,0.1); }
+    .nav__links a:hover, .nav__links a.active { color: #fff; background: rgba(255,255,255,0.08); }
     .nav__user {
       display: flex; align-items: center; gap: 0.6rem;
-      background: var(--surface2); border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 999px; padding: 0.4em 1em;
     }
     .nav__user-avatar {
@@ -110,14 +102,14 @@
       background: var(--grad); display: flex; align-items: center; justify-content: center;
       font-size: 0.75rem; font-weight: 700; color: #fff;
     }
-    .nav__user-name { font-size: 0.88rem; font-weight: 700; color: var(--ink); }
+    .nav__user-name { font-size: 0.88rem; font-weight: 700; color: #fff; }
     .nav__logout {
-      background: transparent; border: 1px solid var(--line);
-      color: var(--ink); opacity: 0.8; border-radius: 999px; padding: 0.4em 1em;
+      background: transparent; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.75); border-radius: 999px; padding: 0.4em 1em;
       font-size: 0.85rem; font-weight: 600;
       transition: all 0.2s;
     }
-    .nav__logout:hover { border-color: var(--c3); color: var(--c3); opacity: 1; }
+    .nav__logout:hover { border-color: var(--c3); color: var(--c3); }
 
     /* ── MAIN LAYOUT ── */
     .dash {
@@ -199,10 +191,10 @@
     .stat-card:nth-child(3) .stat-card__icon { background: rgba(79,209,197,0.15); }
     .stat-card:nth-child(4) .stat-card__icon { background: rgba(255,159,90,0.15); }
     .stat-card__val {
-      font-family: var(--ff-display); font-size: 2rem; font-weight: 800; color: var(--ink); line-height: 1;
+      font-family: var(--ff-display); font-size: 2rem; font-weight: 800; color: #fff; line-height: 1;
     }
-    .stat-card__label { font-size: 0.8rem; color: var(--ink-dim); margin-top: 0.3rem; font-weight: 600; }
-    .stat-card__sub { font-size: 0.75rem; color: var(--ink-dim); opacity: 0.7; margin-top: 0.25rem; }
+    .stat-card__label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; font-weight: 600; }
+    .stat-card__sub { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.25rem; }
 
     /* ── MID GRID ── */
     .mid-grid {
@@ -504,75 +496,6 @@
     @media (max-width: 900px) {
       .productivity-grid { grid-template-columns: 1fr !important; }
     }
-
-    /* ── LIGHT MODE TEXT FIX ──
-       Many elements above were built assuming a permanent dark background and
-       used hardcoded rgba(255,255,255,X) for text. These overrides restore
-       readable contrast when [data-theme="light"] is active. */
-    [data-theme="light"] .welcome__text p,
-    [data-theme="light"] .countdown__label,
-    [data-theme="light"] .subj-pct,
-    [data-theme="light"] .streak-label,
-    [data-theme="light"] .act-time,
-    [data-theme="light"] .goal-val,
-    [data-theme="light"] .onboard p,
-    [data-theme="light"] .btn-ghost,
-    [data-theme="light"] .empty-note,
-    [data-theme="light"] .not-logged p,
-    [data-theme="light"] .no-plan p,
-    [data-theme="light"] .loading p,
-    [data-theme="light"] .todo-item .subj-tag,
-    [data-theme="light"] .clock-modes button,
-    [data-theme="light"] .timer-setup,
-    [data-theme="light"] .clock-display .status,
-    [data-theme="light"] .session-row,
-    [data-theme="light"] .chart-switch button {
-      color: var(--ink-dim);
-    }
-    [data-theme="light"] .card__title,
-    [data-theme="light"] .subj-name,
-    [data-theme="light"] .act-title,
-    [data-theme="light"] .goal-name,
-    [data-theme="light"] .ai-tip__text,
-    [data-theme="light"] .onboard__field label,
-    [data-theme="light"] .modal__field label,
-    [data-theme="light"] .todo-item .txt,
-    [data-theme="light"] .focus-total,
-    [data-theme="light"] .focus-total b,
-    [data-theme="light"] .no-plan h3 {
-      color: var(--ink);
-    }
-    [data-theme="light"] .todo-item .txt.done,
-    [data-theme="light"] .day-miss {
-      color: var(--ink-dim); opacity: 0.5;
-    }
-    [data-theme="light"] .todo-item .del-btn {
-      color: var(--ink-dim); opacity: 0.5;
-    }
-    [data-theme="light"] .day-miss {
-      background: rgba(20,15,40,0.05);
-    }
-    [data-theme="light"] .subj-bar-bg,
-    [data-theme="light"] .goal-bar-bg {
-      background: rgba(20,15,40,0.08);
-    }
-    [data-theme="light"] .btn-ghost {
-      border-color: var(--line) !important;
-    }
-    [data-theme="light"] .btn-ghost:hover {
-      color: var(--ink) !important; border-color: var(--c1) !important;
-    }
-    [data-theme="light"] .btn-clock-reset {
-      color: var(--ink-dim);
-    }
-    [data-theme="light"] .clock-modes button.active,
-    [data-theme="light"] .chart-switch button.active {
-      color: #fff;
-    }
-    #themeToggle:hover { transform: translateY(-50%) scale(1.08); }
-    @media (max-width: 600px) {
-      #themeToggle { left: 10px; width: 38px; height: 38px; font-size: 1rem; }
-    }
   </style>
 </head>
 <body>
@@ -597,10 +520,6 @@
     <a href="auth.html" class="nav__logout">Login</a>
   </div>
 </nav>
-
-<button id="themeToggle" aria-label="Toggle light mode" style="position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:999;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);color:var(--ink);font-size:1.2rem;box-shadow:0 4px 16px rgba(0,0,0,0.3);cursor:pointer;">
-  <span id="themeIconDark">🌙</span><span id="themeIconLight" style="display:none;">☀️</span>
-</button>
 
 <!-- MAIN -->
 <main class="dash" id="main">
@@ -1222,15 +1141,7 @@ async function renderDashboard(skipAuthCheck) {
 // ════════════════════════════════════════════════════════════
 // CHARTS
 // ════════════════════════════════════════════════════════════
-function isLightTheme() {
-  return document.documentElement.getAttribute('data-theme') === 'light';
-}
-
 function buildCharts(subjects, progress, weeklyHours) {
-  const light = isLightTheme();
-  const gridColor = light ? 'rgba(20,15,40,0.08)' : 'rgba(255,255,255,0.04)';
-  const tickColor = light ? 'rgba(20,15,40,0.55)' : 'rgba(255,255,255,0.45)';
-
   const hoursCtx = document.getElementById('hoursChart');
   if (hoursCtx) {
     const todayIdx = mondayIndexOf(new Date());
@@ -1251,8 +1162,8 @@ function buildCharts(subjects, progress, weeklyHours) {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 } } },
-          y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 11 }, callback: v => v+'h' }, beginAtZero: true }
+          x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } } },
+          y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 }, callback: v => v+'h' }, beginAtZero: true }
         }
       }
     });
@@ -1271,7 +1182,7 @@ function buildCharts(subjects, progress, weeklyHours) {
           borderColor: 'rgba(163,92,231,0.8)',
           borderWidth: 2,
           pointBackgroundColor: '#F368B0',
-          pointBorderColor: light ? '#fff' : '#fff',
+          pointBorderColor: '#fff',
           pointRadius: 4,
         }]
       },
@@ -1281,10 +1192,10 @@ function buildCharts(subjects, progress, weeklyHours) {
         scales: {
           r: {
             min: 0, max: 100,
-            grid:        { color: gridColor },
-            angleLines:  { color: gridColor },
+            grid:        { color: 'rgba(255,255,255,0.07)' },
+            angleLines:  { color: 'rgba(255,255,255,0.07)' },
             ticks:       { display: false },
-            pointLabels: { color: tickColor, font: { size: 11 } }
+            pointLabels: { color: 'rgba(255,255,255,0.55)', font: { size: 11 } }
           }
         }
       }
@@ -1412,10 +1323,6 @@ function renderTodoChart() {
   const hexColors = subjects.map(s => getTodoSubjectColor(s));
   if (TODO_CHART) TODO_CHART.destroy();
 
-  const light = isLightTheme();
-  const gridColor = light ? 'rgba(20,15,40,0.08)' : 'rgba(255,255,255,0.04)';
-  const tickColor = light ? 'rgba(20,15,40,0.55)' : 'rgba(255,255,255,0.45)';
-
   let config;
   if (TODO_CHART_TYPE === 'doughnut') {
     config = {
@@ -1431,8 +1338,8 @@ function renderTodoChart() {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: { color: tickColor, font: { size: 10 } }, grid: { display: false } },
-          y: { beginAtZero: true, max: 100, ticks: { color: tickColor, callback: v => v+'%' }, grid: { color: gridColor } }
+          x: { ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 10 } }, grid: { display: false } },
+          y: { beginAtZero: true, max: 100, ticks: { color: 'rgba(255,255,255,0.45)', callback: v => v+'%' }, grid: { color: 'rgba(255,255,255,0.04)' } }
         }
       }
     };
@@ -1443,7 +1350,7 @@ function renderTodoChart() {
       options: {
         responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
-        scales: { r: { min: 0, max: 100, grid: { color: gridColor }, angleLines: { color: gridColor }, ticks: { display: false }, pointLabels: { color: tickColor, font: { size: 10 } } } }
+        scales: { r: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.07)' }, angleLines: { color: 'rgba(255,255,255,0.07)' }, ticks: { display: false }, pointLabels: { color: 'rgba(255,255,255,0.55)', font: { size: 10 } } } }
       }
     };
   }
@@ -1647,22 +1554,6 @@ async function loadTodaySessions() {
   const total = TODAY_SESSIONS.reduce((a,s) => a + s.seconds, 0);
   document.getElementById('sessionTotal').textContent = `${Math.round(total/60)}m`;
 }
-
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const html = document.documentElement;
-  const isLight = html.getAttribute('data-theme') === 'light';
-  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
-  document.getElementById('themeIconDark').style.display = isLight ? 'inline' : 'none';
-  document.getElementById('themeIconLight').style.display = isLight ? 'none' : 'inline';
-
-  if (CURRENT_ROW) {
-    const subjects = EXAM_SUBJECTS[CURRENT_ROW.exam_key] || EXAM_SUBJECTS.GATE_CS;
-    const progress = subjects.map((_, i) => CURRENT_ROW.subject_progress?.[i] ?? 0);
-    const weeklyHours = (CURRENT_ROW.weekly_hours && CURRENT_ROW.weekly_hours.length === 7) ? CURRENT_ROW.weekly_hours : [0,0,0,0,0,0,0];
-    buildCharts(subjects, progress, weeklyHours);
-    renderTodoChart();
-  }
-});
 
 renderDashboard();
 </script>
