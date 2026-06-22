@@ -92,91 +92,87 @@
   </div>
 
   <!-- Signal-flow diagram: the signature element -->
-  <div class="hero__diagram" aria-label="Control systems metaphor for exam success journey">
-    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
-    <svg viewBox="0 0 480 720" xmlns="http://www.w3.org/2000/svg" class="flow-svg">
-      <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--signal)"/>
-        </marker>
-        <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--amber)"/>
-        </marker>
-      </defs>
- 
-      <!-- vertical signal paths -->
-      <line x1="240" y1="64" x2="240" y2="110" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
-      <line x1="240" y1="168" x2="240" y2="214" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
-      <line x1="240" y1="272" x2="240" y2="318" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
-      <line x1="240" y1="376" x2="240" y2="422" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
-      <line x1="240" y1="480" x2="240" y2="526" stroke="var(--amber)" stroke-width="2" marker-end="url(#arrow-amber)"/>
-      <line x1="240" y1="584" x2="240" y2="648" stroke="var(--amber)" stroke-width="2" marker-end="url(#arrow-amber)"/>
- 
-      <!-- feedback loop: error detected → recalibrate → retry -->
-      <path d="M 320 350 C 430 350, 430 80, 320 18" fill="none" stroke="var(--amber)" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#arrow-amber)"/>
-      <text x="438" y="200" class="flow-feedback-label" transform="rotate(90 438 200)">error detected · recalibrate · retry</text>
- 
-      <!-- label: INPUT -->
-      <text x="240" y="108" class="flow-signal-label">INPUT r(t)</text>
- 
-      <!-- Block 1: Define Your Goal -->
-      <g class="flow-block">
-        <rect x="80" y="0" width="320" height="64" rx="6"/>
-        <text x="240" y="20" class="flow-title">DEFINE YOUR GOAL 📡</text>
-        <text x="240" y="38" class="flow-sub">JEE · GATE · UPSC · CAT · NEET</text>
-        <text x="240" y="54" class="flow-sub" style="font-size:0.65rem;opacity:0.5">INPUT: your dream exam &amp; target rank</text>
-      </g>
- 
-      <!-- label: CONTROLLER -->
-      <text x="240" y="212" class="flow-signal-label">CONTROLLER</text>
- 
-      <!-- Block 2: Set Your Controller -->
-      <g class="flow-block flow-block--accent">
-        <rect x="70" y="168" width="340" height="104" rx="6"/>
-        <text x="240" y="192" class="flow-title">SET YOUR CONTROLLER 🎛️</text>
-        <text x="240" y="212" class="flow-sub">AI Planner: your personal algorithm</text>
-        <text x="240" y="230" class="flow-sub" style="font-size:0.7rem;opacity:0.6">Strategy calibrated. Schedule locked in.</text>
-        <text x="240" y="248" class="flow-sub" style="font-size:0.65rem;opacity:0.4">u(t) = smart study plan · zero guesswork</text>
-      </g>
- 
-      <!-- label: PLANT -->
-      <text x="240" y="316" class="flow-signal-label">PLANT G(s)</text>
- 
-      <!-- Block 3: You Are the Plant -->
-      <g class="flow-block flow-block--accent">
-        <rect x="70" y="318" width="340" height="58" rx="6"/>
-        <text x="240" y="342" class="flow-title">YOU ARE THE PLANT 🌿</text>
-        <text x="240" y="360" class="flow-sub">Processing inputs daily — study, practice, grow</text>
-      </g>
- 
-      <!-- label: OUTPUT -->
-      <text x="240" y="420" class="flow-signal-label">OUTPUT y(t)</text>
- 
-      <!-- Block 4: Measure the Output -->
-      <g class="flow-block flow-block--accent">
-        <rect x="60" y="422" width="360" height="58" rx="6"/>
-        <text x="240" y="446" class="flow-title">MEASURE THE OUTPUT 📊</text>
-        <text x="240" y="464" class="flow-sub">Mock tests · weak areas identified &amp; fixed</text>
-      </g>
- 
-      <!-- Block 5: Steady State -->
-      <g class="flow-block flow-block--solid">
-        <rect x="40" y="526" width="400" height="58" rx="6"/>
-        <text x="240" y="550" class="flow-title">STEADY STATE ACHIEVED ✅</text>
-        <text x="240" y="568" class="flow-sub">Exam cracked · Rank secured · System: stable</text>
-      </g>
- 
-      <!-- Output node -->
-      <g class="flow-output">
-        <circle cx="240" cy="672" r="26"/>
-        <text x="240" y="677" class="flow-output-label">y(t)</text>
-      </g>
-      <text x="240" y="708" class="flow-caption">dream realized · steady state</text>
-    </svg>
-  </div>
-</header>
- 
-<main>
+  <!-- Control Systems for Life — signal-flow diagram -->
+<div class="hero__diagram" aria-label="Control systems metaphor for exam success journey">
+  <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+  <svg viewBox="0 0 480 820" xmlns="http://www.w3.org/2000/svg" class="flow-svg">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--signal)"/>
+      </marker>
+      <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--amber)"/>
+      </marker>
+    </defs>
+
+    <!-- BLOCK 1 -->
+    <g class="flow-block">
+      <rect x="80" y="0" width="320" height="70" rx="6"/>
+      <text x="240" y="22" class="flow-title">DEFINE YOUR GOAL 📡</text>
+      <text x="240" y="42" class="flow-sub">JEE · GATE · UPSC · CAT · NEET</text>
+      <text x="240" y="58" class="flow-sub" style="font-size:0.63rem;opacity:0.45">INPUT r(t) — your dream exam &amp; target rank</text>
+    </g>
+
+    <line x1="240" y1="70" x2="240" y2="138" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="256" y="110" class="flow-signal-label" style="text-anchor:start">INPUT →</text>
+
+    <!-- BLOCK 2 -->
+    <g class="flow-block flow-block--accent">
+      <rect x="60" y="140" width="360" height="120" rx="6"/>
+      <text x="240" y="168" class="flow-title">SET YOUR CONTROLLER 🎛️</text>
+      <text x="240" y="190" class="flow-sub">AI Planner: your personal algorithm</text>
+      <text x="240" y="210" class="flow-sub" style="font-size:0.7rem;opacity:0.6">Strategy calibrated. Schedule locked in.</text>
+      <text x="240" y="228" class="flow-sub" style="font-size:0.63rem;opacity:0.4">u(t) = smart study plan · zero guesswork</text>
+      <text x="240" y="248" class="flow-sub" style="font-size:0.6rem;opacity:0.3">CONTROLLER</text>
+    </g>
+
+    <line x1="240" y1="260" x2="240" y2="328" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="256" y="300" class="flow-signal-label" style="text-anchor:start">u(t) →</text>
+
+    <!-- BLOCK 3 -->
+    <g class="flow-block flow-block--accent">
+      <rect x="60" y="330" width="360" height="80" rx="6"/>
+      <text x="240" y="358" class="flow-title">YOU ARE THE PLANT 🌿</text>
+      <text x="240" y="378" class="flow-sub">Processing inputs daily</text>
+      <text x="240" y="396" class="flow-sub" style="font-size:0.63rem;opacity:0.35">PLANT G(s) — study · practice · grow</text>
+    </g>
+
+    <line x1="240" y1="410" x2="240" y2="478" stroke="var(--signal)" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="256" y="450" class="flow-signal-label" style="text-anchor:start">y(t) →</text>
+
+    <!-- BLOCK 4 -->
+    <g class="flow-block flow-block--accent">
+      <rect x="50" y="480" width="380" height="80" rx="6"/>
+      <text x="240" y="508" class="flow-title">MEASURE THE OUTPUT 📊</text>
+      <text x="240" y="528" class="flow-sub">Mock tests · weak areas identified &amp; fixed</text>
+      <text x="240" y="548" class="flow-sub" style="font-size:0.63rem;opacity:0.35">OUTPUT y(t) — compare with goal r(t)</text>
+    </g>
+
+    <line x1="240" y1="560" x2="240" y2="628" stroke="var(--amber)" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+    <!-- BLOCK 5 -->
+    <g class="flow-block flow-block--solid">
+      <rect x="30" y="630" width="420" height="80" rx="6"/>
+      <text x="240" y="658" class="flow-title">STEADY STATE ACHIEVED ✅</text>
+      <text x="240" y="678" class="flow-sub">Exam cracked · Rank secured · System: stable</text>
+      <text x="240" y="698" class="flow-sub" style="font-size:0.63rem;opacity:0.35">error → 0 · dream realized</text>
+    </g>
+
+    <line x1="240" y1="710" x2="240" y2="760" stroke="var(--amber)" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+    <!-- Output node -->
+    <g class="flow-output">
+      <circle cx="240" cy="784" r="26"/>
+      <text x="240" y="789" class="flow-output-label">y(t)</text>
+    </g>
+    <text x="240" y="820" class="flow-caption">dream realized · steady state</text>
+
+    <!-- Feedback loop -->
+    <path d="M 410 500 C 470 500, 470 70, 410 35" fill="none" stroke="var(--amber)" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#arrow-amber)"/>
+    <text x="476" y="280" class="flow-feedback-label" transform="rotate(90 476 280)">error detected · recalibrate · retry</text>
+
+  </svg>
+</div>
 
 <!-- ============ ABOUT ============ -->
 <section class="section about" id="about">
