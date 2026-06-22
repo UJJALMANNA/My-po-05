@@ -855,3 +855,6 @@ button { font-family: inherit; cursor: pointer; }
   background: rgba(243, 104, 176, 0.15);
   color: #F368B0;
 }
+.nav__dropdown-content.is-open {
+  display: block !important;
+}
