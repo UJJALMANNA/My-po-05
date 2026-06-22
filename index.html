@@ -18,21 +18,28 @@
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
+
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
   <a href="#top" class="nav__mark">UM<span class="nav__mark-dot">.</span></a>
+
   <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+
   <div class="nav__links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="#about"><span class="nav__num">01</span>About Me</a>
-    <a href="#gate"><span class="nav__num">03</span>GATE Compass</a>
-    <a href="#news"><span class="nav__num">04</span>Research Updates</a>
-    <a href="planner.html">AI Exam Planner</a>
-    <a href="blog.html">Write Your Blog &amp; Theses</a>
-    <a href="#contact" class="nav__cta"><span class="nav__num">05</span>Query</a>
-    <a href="dashboard.html">Dashboard</a>
+    <a href="index.html" class="nav__tab active">Home</a>
+    <a href="#about" class="nav__tab">About Me</a>
+    <a href="#gate" class="nav__tab">GATE Compass</a>
+    <a href="#news" class="nav__tab">Research Updates</a>
+    <a href="planner.html" class="nav__tab">AI Exam Planner</a>
+    <a href="blog.html" class="nav__tab">Blog & Theses</a>
+    <a href="#contact" class="nav__cta">Query</a>
+    <a href="dashboard.html" class="nav__tab">Dashboard</a>
+  </div>
+
+  <div class="nav__right">
+    <!-- shown when logged OUT -->
     <div class="nav__dropdown" id="loginDropdown">
       <button class="nav__dropbtn">Login <span class="nav__drop-arrow">▼</span></button>
       <div class="nav__dropdown-content">
@@ -40,18 +47,21 @@
         <a href="admin.html">🔐 Admin Login</a>
       </div>
     </div>
-</div>
-<div id="navAuthSlot"></div>
-  </div>
-  <div id="userInfo" style="display: none;" class="nav__user-info">
-    🎓 <span id="userNameDisplay"></span>
+
+    <!-- shown when logged IN -->
+    <div id="userInfo" style="display:none;" class="nav__profile" id="profileDropdown">
+      <div class="nav__profile-pill" id="profileToggle">
+        <div class="nav__profile-avatar">U</div>
+        <span class="nav__profile-name" id="userNameDisplay"></span>
+        <span class="nav__profile-chevron">▼</span>
+      </div>
+      <div class="nav__profile-menu" id="profileMenu">
+        <a href="dashboard.html"><i>🎓</i> Dashboard</a>
+        <a href="#" id="logoutBtn"><i>🚪</i> Logout</a>
+      </div>
+    </div>
   </div>
 </nav>
-
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-  <span class="icon-light">☀️</span><span class="icon-dark">🌙</span>
-</button>
-
  
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
