@@ -315,7 +315,7 @@
   });
 </script>
   <!--  Addding for Login Dropdown  -->
-  <script>
+  <!-- <script>
   const loginDropdown = document.getElementById('loginDropdown');
   loginDropdown.querySelector('.nav__dropbtn').addEventListener('click', function(e) {
     e.stopPropagation();
@@ -323,6 +323,38 @@
   });
   document.addEventListener('click', function() {
     loginDropdown.classList.remove('is-open');
+  });
+</script> -->
+  <script>
+  /* Login dropdown */
+  const loginDropdown = document.getElementById('loginDropdown');
+  if (loginDropdown) {
+    loginDropdown.querySelector('.nav__dropbtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      loginDropdown.classList.toggle('is-open');
+    });
+  }
+
+  /* Profile dropdown */
+  const profileToggle = document.getElementById('profileToggle');
+  const profileDropdown = document.getElementById('userInfo');
+  if (profileToggle) {
+    profileToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('is-open');
+    });
+  }
+
+  /* Close both on outside click */
+  document.addEventListener('click', function() {
+    if (loginDropdown) loginDropdown.classList.remove('is-open');
+    if (profileDropdown) profileDropdown.classList.remove('is-open');
+  });
+
+  /* Active tab highlight */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav__tab').forEach(link => {
+    if (link.getAttribute('href') === currentPage) link.classList.add('active');
   });
 </script>
 </body>
