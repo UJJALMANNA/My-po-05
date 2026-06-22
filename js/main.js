@@ -83,8 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Footer year
+  // footer year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // MOBILE: hide/show nav__right based on login state
+  const navRight = document.querySelector('.nav__right');
+  function updateNavRightMobile() {
+    if (window.innerWidth <= 900 && navRight) {
+      const isLoggedIn = userInfo && userInfo.style.display !== 'none';
+      navRight.style.display = isLoggedIn ? 'flex' : 'none';
+    } else if (navRight) {
+      navRight.style.display = 'flex';
+    }
+  }
+  updateNavRightMobile();
+  window.addEventListener('resize', updateNavRightMobile);
 });
