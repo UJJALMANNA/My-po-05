@@ -639,3 +639,61 @@ button { font-family: inherit; cursor: pointer; }
   transition: background 0.15s ease, color 0.15s ease;
 }
 .nav__profile-menu a:hover { background: rgba(243,104,176,0.1); color: #FFE8F3; }
+
+/* ===========================================================
+   MOBILE MENU FIXES
+   =========================================================== */
+
+/* Dark overlay when menu is open */
+.nav__overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 98;
+  backdrop-filter: blur(2px);
+}
+.nav__overlay.is-open { display: block; }
+
+/* Close button inside sidebar */
+.nav__close {
+  display: none;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(243,104,176,0.1);
+  border: 0.5px solid rgba(243,104,176,0.25);
+  color: #FFE8F3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Mobile login links inside sidebar */
+.nav__mobile-login {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid rgba(243,104,176,0.15);
+}
+.nav__mobile-login a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9A7F8E;
+  padding: 0.6em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.nav__mobile-login a:hover { color: #FFE8F3; }
+
+@media (max-width: 900px) {
+  .nav__close { display: flex; }
+  .nav__mobile-login { display: flex; }
+}
