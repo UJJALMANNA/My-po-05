@@ -697,3 +697,34 @@ button { font-family: inherit; cursor: pointer; }
   .nav__close { display: flex; }
   .nav__mobile-login { display: flex; }
 }
+@media (max-width: 900px) {
+  .nav__right {
+    display: none;
+  }
+  .nav__right:has(#userInfo[style*="display: flex"]),
+  .nav__right:has(#userInfo:not([style*="display: none"])) {
+    display: flex;
+  }
+  .nav__dropdown-content {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    top: auto;
+    width: auto;
+    min-width: unset;
+  }
+  .nav__profile-menu {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    top: auto;
+    width: auto;
+    min-width: unset;
+  }
+  .nav__close {
+    display: flex !important;
+  }
+  .nav__mobile-login {
+    display: flex !important;
+  }
+}
