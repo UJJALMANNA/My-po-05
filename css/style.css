@@ -539,7 +539,7 @@ button { font-family: inherit; cursor: pointer; }
 .flow-signal-label {
   font-family: var(--font-mono, monospace);
   font-size: 0.6rem;
-  fill: rgba(255, 255, 255, 0.25);
+  fill: rgba(255,255,255,0.25);
   text-anchor: middle;
   letter-spacing: 0.08em;
   text-transform: uppercase;
