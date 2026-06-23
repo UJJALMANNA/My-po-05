@@ -347,7 +347,7 @@ button { font-family: inherit; cursor: pointer; }
   flex: 1; position: relative; z-index: 2;
 }
 .feature-card__cta {
-  font-size: .77rem; font-weight: 700; color: var(--c-indigo);
+  font-size: .77rem; font-weight: 700; color: var(--c-indigo) !important;
   display: inline-flex; align-items: center; gap: .3em;
   transition: gap .2s ease; position: relative; z-index: 2;
 }
