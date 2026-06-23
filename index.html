@@ -114,58 +114,117 @@
   <!-- Animated character -->
  
 <!-- ============ ABOUT ============ -->
-<section class="section about" id="about">
-  <div class="section__head">
-    <span class="section__num">01</span>
-    <h2>About Me</h2>
+<!-- ============================================================
+   ABOUT CARD — Ujjal Manna
+   Paste this INSIDE your <section class="section about" id="about">
+   REPLACE your existing .about__card div with this entire block
+   ============================================================ -->
+
+<div class="about__card about__card--redesigned">
+
+  <!-- Animated gradient border glow -->
+  <div class="acard__border-glow"></div>
+
+  <!-- Background orbs -->
+  <div class="acard__orb1"></div>
+  <div class="acard__orb2"></div>
+
+  <!-- Header -->
+  <div class="acard__header">
+    <div class="acard__avatar">UM</div>
+    <div class="acard__head-text">
+      <div class="acard__badge">✦ Verified Academic Record</div>
+
+      <!-- NAME + BLUE TICK -->
+      <h3 class="acard__title">
+        Ujjal Manna
+        <span class="acard__bluetick" aria-label="Verified">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="12" fill="url(#blueTickGrad)"/>
+            <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="blueTickGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1DA1F2"/>
+                <stop offset="100%" stop-color="#0066CC"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </h3>
+
+      <p class="acard__sub">The journey behind this platform</p>
+    </div>
   </div>
 
-  <div class="about__card about__card--redesigned">
-  <div class="acard__header">
-    <span class="acard__badge">🎓 Verified</span>
-    <h3 class="acard__title">Academic Record</h3>
-    <p class="acard__sub">The journey behind this platform</p>
+  <!-- Quick Stats Row -->
+  <div class="acard__stats">
+    <div class="acard__stat">
+      <div class="acard__stat-val">8.08</div>
+      <div class="acard__stat-label">CGPA</div>
+    </div>
+    <div class="acard__stat">
+      <div class="acard__stat-val">2×</div>
+      <div class="acard__stat-label">GATE Qualified</div>
+    </div>
+    <div class="acard__stat">
+      <div class="acard__stat-val">IIT</div>
+      <div class="acard__stat-label">Bhilai</div>
+    </div>
   </div>
+
+  <!-- Divider -->
+  <div class="acard__divider"></div>
+
+  <!-- Info Items -->
   <div class="acard__items">
     <div class="acard__item">
-      <span class="acard__icon">🏛️</span>
+      <div class="acard__icon-wrap">🏛️</div>
       <div class="acard__info">
         <span class="acard__label">Current Institute</span>
         <span class="acard__value">IIT Bhilai</span>
       </div>
+      <div class="acard__dot"></div>
     </div>
     <div class="acard__item">
-      <span class="acard__icon">📐</span>
+      <div class="acard__icon-wrap">📐</div>
       <div class="acard__info">
         <span class="acard__label">Programme</span>
         <span class="acard__value">M.Tech · Control &amp; Instrumentation</span>
       </div>
+      <div class="acard__dot"></div>
     </div>
     <div class="acard__item">
-      <span class="acard__icon">🎒</span>
+      <div class="acard__icon-wrap">🎒</div>
       <div class="acard__info">
         <span class="acard__label">Undergraduate</span>
         <span class="acard__value">B.Tech · BBIT Kolkata</span>
       </div>
+      <div class="acard__dot"></div>
     </div>
     <div class="acard__item">
-      <span class="acard__icon">⭐</span>
+      <div class="acard__icon-wrap">⭐</div>
       <div class="acard__info">
         <span class="acard__label">CGPA</span>
-        <span class="acard__value acard__value--highlight">8.08</span>
+        <span class="acard__value acard__value--highlight">8.08 / 10</span>
       </div>
+      <div class="acard__dot"></div>
     </div>
     <div class="acard__item">
-      <span class="acard__icon">✅</span>
+      <div class="acard__icon-wrap">✅</div>
       <div class="acard__info">
         <span class="acard__label">GATE CS</span>
         <span class="acard__value acard__value--highlight">Qualified — 2025 &amp; 2026</span>
       </div>
+      <div class="acard__dot"></div>
     </div>
   </div>
+
+  <!-- Footer -->
   <div class="acard__footer">
-    <span>🌱 From Tier-3 to IIT — your journey can start here too</span>
+    <span class="acard__footer-icon">🌱</span>
+    <span>From <strong>Tier-3</strong> to <strong>IIT</strong> — your journey can start here too</span>
   </div>
+
 </div>
 <!-- ============ PATH (timeline) ============ -->
 <section class="section path" id="path">
