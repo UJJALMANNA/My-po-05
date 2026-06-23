@@ -10,5 +10,5 @@
 
 const SUPABASE_CONFIG = {
   url: "https://wywiviqovmwdthtuxtvw.supabase.co",   // e.g. https://xxxxxxxx.supabase.co
-  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5d2l2aXFvdm13ZHRodHV4dHZ3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTc3NzkxNSwiZXhwIjoyMDk3MzUzOTE1fQ.sILBxLguK3tL-BL3zOL-unjCO0rkj9qjYvTP1wblJyA"
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5d2l2aXFvdm13ZHRodHV4dHZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Nzc5MTUsImV4cCI6MjA5NzM1MzkxNX0.5IgGaMKww513V4dxljTK7KFcTby0OwGbDe89e6UCs0E"
 };
