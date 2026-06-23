@@ -527,5 +527,25 @@
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
   });
 </script>
+  <!-- Animation for hero  -->
+  <!-- Hero particles -->
+<script>
+  const container = document.getElementById('heroParticles');
+  const colors = ['#6C5CE7','#A35CE7','#F368B0','#4FD1C5','#FF9F5A'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'hero__particle';
+    const size = 2 + Math.random() * 3;
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${40+Math.random()*60}%;
+      width:${size}px; height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      --d:${4+Math.random()*6}s;
+      --dl:${Math.random()*5}s;
+    `;
+    container.appendChild(p);
+  }
+</script>
 </body>
 </html>
