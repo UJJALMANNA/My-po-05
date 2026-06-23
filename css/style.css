@@ -162,7 +162,7 @@ button { font-family: inherit; cursor: pointer; }
   background-image:
     linear-gradient(rgba(108,92,231,.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(108,92,231,.045) 1px, transparent 1px);
-  background-size: 56px 30px;
+  background-size: 56px 56px;
   animation: gridPulse 5s ease-in-out infinite;
 }
 @keyframes gridPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
