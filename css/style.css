@@ -869,7 +869,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ===========================================================
    HERO FEATURE CARDS
    =========================================================== */
-.hero__features {
+/* .hero__features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
@@ -936,7 +936,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 @media (max-width: 600px) {
   .hero__features { grid-template-columns: 1fr; }
-}
+} */
 
 /* ===========================================================
    NAV — Theme 3 Charcoal Pink + Style F
