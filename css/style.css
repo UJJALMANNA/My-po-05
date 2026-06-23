@@ -148,7 +148,6 @@ button { font-family: inherit; cursor: pointer; }
    HERO — v3
    ============================================================ */
 .hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   padding: calc(var(--space-6) + 2rem) var(--space-4) var(--space-5);
