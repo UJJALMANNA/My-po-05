@@ -534,18 +534,55 @@
 // ════════════════════════════════════════════════════════════
 // EXAM DATA
 // ════════════════════════════════════════════════════════════
-const EXAM_SUBJECTS = {
-  GATE_CS:  ['Data Structures','Algorithms','OS','DBMS','Networks','Theory of Computation','Digital Logic','Maths'],
-  GATE_EC:  ['Control Systems','Signal Processing','Electromagnetics','Networks','Digital Circuits','Maths','Analog Circuits','Communications'],
-  JEE_MAIN: ['Physics','Chemistry','Mathematics'],
-  UPSC_CSE: ['General Studies I','General Studies II','General Studies III','Essay','Optional I','Optional II'],
-  CAT:      ['Quantitative Aptitude','Verbal Ability','Data Interpretation','Logical Reasoning'],
+const ALL_EXAMS = {
+  GATE_CS:      { label:'GATE – CS & IT',          cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Data Structures','Algorithms','Operating Systems','DBMS','Computer Networks','Theory of Computation','Digital Logic','Compiler Design','COA'] },
+  GATE_EC:      { label:'GATE – Electronics (EC)', cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Network Theory','Electronic Devices','Analog Circuits','Digital Circuits','Control Systems','Signals & Systems','Electromagnetics','Communications'] },
+  GATE_EE:      { label:'GATE – Electrical (EE)',  cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Electric Circuits','Electromagnetic Fields','Electrical Machines','Power Systems','Control Systems','Power Electronics','Signals & Systems'] },
+  GATE_ME:      { label:'GATE – Mechanical (ME)',  cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Engineering Mechanics','Strength of Materials','Theory of Machines','Fluid Mechanics','Heat Transfer','Thermodynamics','Manufacturing'] },
+  GATE_CE:      { label:'GATE – Civil (CE)',        cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Structural Analysis','Concrete Structures','Steel Structures','Soil Mechanics','Fluid Mechanics','Transportation','Environmental Engg'] },
+  GATE_IN:      { label:'GATE – Instrumentation',  cat:'Engineering',    examMonth:2,  subjects:['Engineering Mathematics','Electrical Circuits','Signals & Systems','Control Systems','Analog Electronics','Digital Electronics','Measurements','Sensors'] },
+  JEE_MAIN:     { label:'JEE Main',                cat:'Engineering',    examMonth:1,  subjects:['Physics','Chemistry','Mathematics'] },
+  JEE_ADV:      { label:'JEE Advanced',            cat:'Engineering',    examMonth:5,  subjects:['Physics (Advanced)','Chemistry (Advanced)','Mathematics (Advanced)'] },
+  NEET_UG:      { label:'NEET UG',                 cat:'Medical',        examMonth:5,  subjects:['Biology – Zoology','Biology – Botany','Physics','Chemistry'] },
+  NEET_PG:      { label:'NEET PG',                 cat:'Medical',        examMonth:3,  subjects:['General Medicine','Surgery','Obstetrics & Gynae','Pediatrics','PSM','Pathology','Pharmacology','Microbiology'] },
+  NORCET:       { label:'NORCET',                  cat:'Medical',        examMonth:8,  subjects:['Medical Surgical Nursing','Community Health Nursing','Obstetric Nursing','Pediatric Nursing','Psychiatric Nursing','Pharmacology'] },
+  BSC_NURSING:  { label:'B.Sc Nursing Entrance',   cat:'Medical',        examMonth:6,  subjects:['Biology','Chemistry','Physics','English','General Knowledge'] },
+  MSC_NURSING:  { label:'M.Sc Nursing Entrance',   cat:'Medical',        examMonth:6,  subjects:['Advanced Nursing Science','Nursing Research','Healthcare Management'] },
+  ESIC_NURSING: { label:'ESIC Nursing',            cat:'Medical',        examMonth:10, subjects:['Nursing Fundamentals','Medical Surgical Nursing','Pharmacology','Community Health'] },
+  UPSC_CSE:     { label:'UPSC CSE (IAS/IPS/IFS)',  cat:'Civil Services', examMonth:5,  subjects:['General Studies I','General Studies II','General Studies III','GS IV Ethics','CSAT','Optional Paper I','Optional Paper II','Essay'] },
+  UPSC_CAPF:    { label:'UPSC CAPF',               cat:'Civil Services', examMonth:8,  subjects:['General Ability','General Science','Current Events','Indian Polity','History','Geography'] },
+  STATE_PSC:    { label:'State PSC',               cat:'Civil Services', examMonth:3,  subjects:['State GK','National GK','History','Geography','Polity','Economy','General Science'] },
+  SSC_CGL:      { label:'SSC CGL',                 cat:'SSC',            examMonth:9,  subjects:['Quantitative Aptitude','English Language','General Intelligence','General Awareness'] },
+  SSC_CHSL:     { label:'SSC CHSL',                cat:'SSC',            examMonth:3,  subjects:['Quantitative Aptitude','English Language','General Intelligence','General Awareness'] },
+  SSC_MTS:      { label:'SSC MTS',                 cat:'SSC',            examMonth:7,  subjects:['Numerical Aptitude','Reasoning','General English','General Knowledge'] },
+  SSC_CPO:      { label:'SSC CPO',                 cat:'SSC',            examMonth:6,  subjects:['General Intelligence','General Knowledge','Quantitative Aptitude','English'] },
+  IBPS_PO:      { label:'IBPS PO',                 cat:'Banking',        examMonth:10, subjects:['Reasoning Ability','Quantitative Aptitude','English Language','General Awareness','Computer Aptitude'] },
+  IBPS_CLERK:   { label:'IBPS Clerk',              cat:'Banking',        examMonth:12, subjects:['Reasoning','Numerical Ability','English','General Awareness','Computer'] },
+  SBI_PO:       { label:'SBI PO',                  cat:'Banking',        examMonth:12, subjects:['Reasoning','Quantitative Aptitude','English','Data Analysis','General Awareness'] },
+  SBI_CLERK:    { label:'SBI Clerk',               cat:'Banking',        examMonth:1,  subjects:['Reasoning Ability','Numerical Ability','English Language','General Awareness'] },
+  RBI_GRADE_B:  { label:'RBI Grade B',             cat:'Banking',        examMonth:8,  subjects:['General Awareness','English','Quantitative Aptitude','Economics & Social Issues','Finance & Management'] },
+  NABARD_A:     { label:'NABARD Grade A',          cat:'Banking',        examMonth:8,  subjects:['Economic & Social Issues','Agriculture','English','Computer','Reasoning'] },
+  NDA:          { label:'NDA',                     cat:'Defence',        examMonth:9,  subjects:['Mathematics','English','General Knowledge','Physics','Chemistry','History','Geography'] },
+  CDS:          { label:'CDS',                     cat:'Defence',        examMonth:9,  subjects:['English','General Knowledge','Elementary Mathematics'] },
+  AFCAT:        { label:'AFCAT',                   cat:'Defence',        examMonth:2,  subjects:['Verbal Ability','Numerical Ability','Reasoning','Military Aptitude','General Awareness'] },
+  AGNIVEER:     { label:'Agniveer',                cat:'Defence',        examMonth:4,  subjects:['Physics','Mathematics','English','General Science','General Knowledge'] },
+  BHEL:         { label:'BHEL Recruitment',        cat:'PSU',            examMonth:10, subjects:['Core Engineering Subject','Quantitative Aptitude','Verbal Ability','General Knowledge'] },
+  DRDO:         { label:'DRDO Scientist',          cat:'PSU',            examMonth:9,  subjects:['Core Technical Subject','Reasoning Ability','General Science','Mathematics'] },
+  ONGC:         { label:'ONGC Recruitment',        cat:'PSU',            examMonth:11, subjects:['Technical Subject','Quantitative Aptitude','Verbal Ability','General Knowledge'] },
+  RRB_JE:       { label:'RRB JE',                  cat:'Railway',        examMonth:5,  subjects:['Mathematics','General Intelligence','General Awareness','General Science','Technical Subject'] },
+  RRB_NTPC:     { label:'RRB NTPC',                cat:'Railway',        examMonth:12, subjects:['Mathematics','General Intelligence','General Awareness'] },
+  RRB_GROUP_D:  { label:'RRB Group D',             cat:'Railway',        examMonth:9,  subjects:['Mathematics','General Intelligence','General Science','General Awareness'] },
+  RRB_ALP:      { label:'RRB ALP',                 cat:'Railway',        examMonth:8,  subjects:['Mathematics','General Intelligence','Basic Science','Technical Trade'] },
+  IB_ACIO:      { label:'IB ACIO',                 cat:'Intelligence',   examMonth:10, subjects:['General Awareness','Quantitative Aptitude','Logical Ability','English'] },
+  UGC_NET:      { label:'UGC NET',                 cat:'Teaching',       examMonth:6,  subjects:['Paper 1 – Teaching Aptitude','Paper 1 – Research Methodology','Paper 1 – Logical Reasoning','Paper 2 – Subject Specific'] },
+  CTET:         { label:'CTET / STET',             cat:'Teaching',       examMonth:12, subjects:['Child Development & Pedagogy','Language I','Language II','Mathematics / Science / SST'] },
 };
-const EXAM_MONTHS = { GATE_CS:2, GATE_EC:2, JEE_MAIN:1, UPSC_CSE:6, CAT:11 };
-const EXAM_LABELS = { GATE_CS:'GATE CS', GATE_EC:'GATE EC', JEE_MAIN:'JEE Main', UPSC_CSE:'UPSC CSE', CAT:'CAT' };
-const SUBJECT_COLORS = ['#6C5CE7','#F368B0','#4FD1C5','#FF9F5A','#A35CE7','#00B894','#FDCB6E','#E17055'];
-const DAY_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']; // weekly_hours[0]=Mon ... [6]=Sun
 
+const EXAM_SUBJECTS = Object.fromEntries(Object.entries(ALL_EXAMS).map(([k,v]) => [k, v.subjects]));
+const EXAM_MONTHS   = Object.fromEntries(Object.entries(ALL_EXAMS).map(([k,v]) => [k, v.examMonth]));
+const EXAM_LABELS   = Object.fromEntries(Object.entries(ALL_EXAMS).map(([k,v]) => [k, v.label]));
+const SUBJECT_COLORS = ['#6C5CE7','#F368B0','#4FD1C5','#FF9F5A','#A35CE7','#00B894','#FDCB6E','#E17055','#74B9FF','#55EFC4'];
+const DAY_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 let CURRENT_USER = null;
 let CURRENT_ROW  = null; // current student_progress row, kept in memory after fetch
 
@@ -648,8 +685,19 @@ function updateNav(firstName) {
 // ════════════════════════════════════════════════════════════
 function renderOnboarding(firstName) {
   const main = document.getElementById('main');
-  const examOptions = Object.keys(EXAM_LABELS)
-    .map(k => `<option value="${k}">${EXAM_LABELS[k]}</option>`).join('');
+
+  const categories = {};
+  Object.entries(ALL_EXAMS).forEach(([key, info]) => {
+    if (!categories[info.cat]) categories[info.cat] = [];
+    categories[info.cat].push({ key, label: info.label });
+  });
+
+  const examOptions = Object.entries(categories).map(([cat, exams]) =>
+    `<optgroup label="── ${cat} ──">
+      ${exams.map(e => `<option value="${e.key}">${e.label}</option>`).join('')}
+    </optgroup>`
+  ).join('');
+
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from({length:6}, (_,i) => currentYear+i)
     .map(y => `<option value="${y}">${y}</option>`).join('');
@@ -658,26 +706,39 @@ function renderOnboarding(firstName) {
     <div class="onboard">
       <div style="font-size:2.5rem;margin-bottom:0.5rem">🎯</div>
       <h2>Hi ${firstName}, let's set up your dashboard</h2>
-      <p>Pick the exam you're preparing for. We'll start tracking your real progress from zero — no fake numbers.</p>
+      <p>Pick the exam you're preparing for and your target year. We'll track your real progress from scratch.</p>
       <div class="onboard__row">
         <div class="onboard__field">
           <label>Exam</label>
-          <select id="onbExam">${examOptions}</select>
+          <select id="onbExam" style="max-width:100%">${examOptions}</select>
         </div>
         <div class="onboard__field">
           <label>Target Year</label>
           <select id="onbYear">${yearOptions}</select>
         </div>
       </div>
-      <button class="btn-primary" id="onbSubmit">Create my dashboard</button>
+      <div style="margin-bottom:1.25rem;text-align:left">
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-bottom:0.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em">Subjects you'll track:</div>
+        <div id="onbSubjectPreview" style="display:flex;flex-wrap:wrap;gap:0.4rem;"></div>
+      </div>
+      <button class="btn-primary" id="onbSubmit">Create my dashboard →</button>
     </div>`;
+
+  function updatePreview() {
+    const key = document.getElementById('onbExam').value;
+    const subjects = ALL_EXAMS[key]?.subjects || [];
+    document.getElementById('onbSubjectPreview').innerHTML =
+      subjects.map(s => `<span style="font-size:0.75rem;padding:0.25em 0.7em;border-radius:999px;background:rgba(108,92,231,0.15);color:#b3a8f7;font-family:var(--ff-mono)">${s}</span>`).join('');
+  }
+  document.getElementById('onbExam').addEventListener('change', updatePreview);
+  updatePreview();
 
   document.getElementById('onbSubmit').addEventListener('click', async () => {
     const btn = document.getElementById('onbSubmit');
     btn.disabled = true; btn.textContent = 'Setting up…';
     const examKey  = document.getElementById('onbExam').value;
     const examYear = parseInt(document.getElementById('onbYear').value);
-    const subjectCount = (EXAM_SUBJECTS[examKey]||[]).length;
+    const subjectCount = (ALL_EXAMS[examKey]?.subjects || []).length;
 
     const newRow = {
       user_id: CURRENT_USER.id,
@@ -689,7 +750,6 @@ function renderOnboarding(firstName) {
       weekly_hours: [0,0,0,0,0,0,0],
       total_hours: 0,
     };
-
     try {
       const { error } = await supabaseClient.from('student_progress').insert(newRow);
       if (error) throw error;
@@ -697,8 +757,8 @@ function renderOnboarding(firstName) {
       await renderDashboard(true);
     } catch (e) {
       console.error(e);
-      btn.disabled = false; btn.textContent = 'Create my dashboard';
-      alert('Could not save your selection. Please try again.');
+      btn.disabled = false; btn.textContent = 'Create my dashboard →';
+      alert('Could not save. Please try again.');
     }
   });
 }
