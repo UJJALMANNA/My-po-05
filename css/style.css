@@ -272,35 +272,328 @@ button { font-family: inherit; cursor: pointer; }
 /* ===========================================================
    ABOUT
    =========================================================== */
-.about__grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-5); align-items: start; }
-.about__lead { font-size: 1.3rem; color: var(--ink); margin-top: 0; font-weight: 600; }
-.about__text p { color: var(--ink-dim); }
-.about__card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: var(--space-3);
-  box-shadow: var(--shadow-sm);
-  position: relative; overflow: hidden;
-}
-.about__card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--grad-primary);
-}
-.about__card-title {
-  font-family: var(--font-display); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
-  font-weight: 700; color: var(--c-indigo); margin-bottom: var(--space-3);
-}
-.record__row {
-  display: flex; justify-content: space-between; gap: var(--space-2);
-  padding: 0.7em 0; border-bottom: 1px solid var(--line);
-  font-family: var(--font-body); font-size: 0.92rem;
-}
-.record__row:last-child { border-bottom: none; }
-.record dt { color: var(--ink-dim); font-weight: 500; }
-.record dd { margin: 0; text-align: right; color: var(--ink); font-weight: 700; }
+/* ============================================================
+   ABOUT CARD STYLES — Ujjal Manna
+   Paste this into your css/style.css
+   Find your existing .about__card styles and REPLACE them
+   with everything below
+   ============================================================ */
 
-@media (max-width: 860px) {
-  .about__grid { grid-template-columns: 1fr; }
+/* ---- Keyframe Animations ---- */
+@keyframes acard-borderFlow {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
 }
+@keyframes acard-fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes acard-itemIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes acard-pulseGlow {
+  0%,100% { box-shadow: 0 0 28px rgba(108,92,231,0.28), 0 0 56px rgba(163,92,231,0.12); }
+  50%      { box-shadow: 0 0 44px rgba(108,92,231,0.50), 0 0 80px rgba(243,104,176,0.22); }
+}
+@keyframes acard-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes acard-floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%     { transform: translate(14px,18px) scale(1.07); }
+}
+@keyframes acard-badgePop {
+  0%   { transform: scale(0.75); opacity: 0; }
+  70%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes acard-tickPop {
+  0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+  60%  { transform: scale(1.25) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes acard-tickGlow {
+  0%,100% { filter: drop-shadow(0 0 4px rgba(29,161,242,0.5)); }
+  50%      { filter: drop-shadow(0 0 10px rgba(29,161,242,0.9)); }
+}
+
+/* ---- Card Wrapper ---- */
+.about__card--redesigned {
+  position: relative;
+  background: var(--surface);          /* your site's --surface = #13111F */
+  border-radius: 20px;
+  padding: 2px;                         /* space for gradient border */
+  max-width: 600px;
+  margin: 0 auto;
+  animation: acard-pulseGlow 3.5s ease-in-out infinite,
+             acard-fadeUp 0.6s ease both;
+  overflow: hidden;
+}
+
+/* ---- Animated Gradient Border ---- */
+.acard__border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(120deg, #6C5CE7, #A35CE7, #F368B0, #FF9F5A, #6C5CE7);
+  background-size: 300% 300%;
+  animation: acard-borderFlow 4s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Inner Content Surface ---- */
+.about__card--redesigned > *:not(.acard__border-glow):not(.acard__orb1):not(.acard__orb2) {
+  position: relative;
+  z-index: 2;
+}
+
+/* We need an inner wrapper trick — add padding here */
+.about__card--redesigned {
+  padding: 1.75rem;
+}
+
+/* ---- Background Orbs ---- */
+.acard__orb1 {
+  position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(108,92,231,0.18);
+  filter: blur(50px);
+  pointer-events: none; z-index: 1;
+  animation: acard-floatOrb 8s ease-in-out infinite;
+}
+.acard__orb2 {
+  position: absolute; bottom: -40px; left: -40px;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(243,104,176,0.14);
+  filter: blur(40px);
+  pointer-events: none; z-index: 1;
+  animation: acard-floatOrb 10s ease-in-out infinite reverse;
+}
+
+/* ---- Header ---- */
+.acard__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Avatar circle */
+.acard__avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, #6C5CE7, #F368B0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800; color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(108,92,231,0.3), 0 0 20px rgba(108,92,231,0.35);
+  animation: acard-fadeUp 0.5s ease both;
+}
+
+.acard__head-text { flex: 1; }
+
+/* Verified badge */
+.acard__badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px;
+  background: rgba(108,92,231,0.18);
+  border: 1px solid rgba(108,92,231,0.4);
+  color: #b3a8f7;
+  margin-bottom: 6px;
+  animation: acard-badgePop 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+}
+
+/* ---- Name + Blue Tick ---- */
+.acard__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #b3a8f7, #F368B0, #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: acard-shimmer 4s linear infinite;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+/* Blue tick icon */
+.acard__bluetick {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  animation: acard-tickPop 0.6s cubic-bezier(0.22,1,0.36,1) 0.4s both,
+             acard-tickGlow 2.5s ease-in-out 1s infinite;
+  cursor: default;
+}
+
+.acard__bluetick svg {
+  display: block;
+}
+
+/* Tooltip on hover */
+.acard__bluetick {
+  position: relative;
+}
+.acard__bluetick::after {
+  content: 'Verified Creator';
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(29,161,242,0.92);
+  padding: 3px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-family: var(--font-mono, monospace);
+}
+.acard__bluetick:hover::after {
+  opacity: 1;
+}
+
+.acard__sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+}
+
+/* ---- Stats Row ---- */
+.acard__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  animation: acard-fadeUp 0.5s ease 0.1s both;
+}
+
+.acard__stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.65rem;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.acard__stat:hover {
+  background: rgba(108,92,231,0.12);
+  border-color: rgba(108,92,231,0.35);
+  box-shadow: 0 0 16px rgba(108,92,231,0.2);
+}
+.acard__stat-val {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 800;
+  background: linear-gradient(90deg, #6C5CE7, #A35CE7, #F368B0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  line-height: 1; margin-bottom: 3px;
+}
+.acard__stat-label {
+  font-size: 10px; color: rgba(255,255,255,0.35);
+  font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+}
+
+/* ---- Divider ---- */
+.acard__divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108,92,231,0.35), rgba(243,104,176,0.3), transparent);
+  margin: 0 0.5rem 1.25rem;
+}
+
+/* ---- Items List ---- */
+.acard__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.25rem;
+}
+
+.acard__item {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: default;
+  opacity: 0;
+  animation: acard-itemIn 0.45s ease both;
+}
+.acard__item:nth-child(1) { animation-delay: 0.15s; }
+.acard__item:nth-child(2) { animation-delay: 0.25s; }
+.acard__item:nth-child(3) { animation-delay: 0.35s; }
+.acard__item:nth-child(4) { animation-delay: 0.45s; }
+.acard__item:nth-child(5) { animation-delay: 0.55s; }
+
+.acard__item:hover {
+  background: rgba(108,92,231,0.1);
+  transform: translateX(5px);
+}
+
+.acard__icon-wrap {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.acard__item:hover .acard__icon-wrap {
+  background: rgba(108,92,231,0.2);
+  box-shadow: 0 0 12px rgba(108,92,231,0.3);
+}
+
+.acard__info {
+  display: flex; flex-direction: column; gap: 1px; flex: 1;
+}
+.acard__label {
+  font-size: 10.5px; color: rgba(255,255,255,0.38);
+  font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+}
+.acard__value {
+  font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,0.85);
+}
+.acard__value--highlight {
+  background: linear-gradient(90deg, #6C5CE7, #F368B0);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 800;
+}
+
+.acard__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(135deg, #6C5CE7, #F368B0);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(108,92,231,0.6);
+}
+
+/* ---- Footer ---- */
+.acard__footer {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(120deg, rgba(108,92,231,0.12), rgba(243,104,176,0.08));
+  border: 1px solid rgba(108,92,231,0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  animation: acard-fadeUp 0.5s ease 0.65s both;
+}
+.acard__footer-icon { font-size: 1.1rem; flex-shrink: 0; }
+.acard__footer span { font-size: 12.5px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.acard__footer strong { color: #b3a8f7; font-weight: 700; }
 
 /* ===========================================================
    TIMELINE (path)
