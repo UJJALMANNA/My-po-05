@@ -46,57 +46,73 @@ function redirectAfterLogin() {
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessage();
-const firstName = document.getElementById('signFirstname').value;
-const lastName = document.getElementById('signLastname').value;
-const email = document.getElementById("signupEmail").value.trim();
-const mobile = document.getElementById("signupMobile").value.trim();
-const age = document.getElementById("signupAge").value.trim();
-const profession = document.getElementById("signupProfession").value;
-const password = document.getElementById("signupPassword").value;
-const confirmPassword = document.getElementById("signupConfirmPassword").value;
-const submitBtn = document.getElementById("signupSubmitBtn");
 
-// Check passwords match
-if (password !== confirmPassword) {
-  showMessage("Passwords do not match!", "red"); // use whatever your existing error-display function/pattern is, or swap for your messageBox code
-  return;
-}
+  const firstName  = document.getElementById("signFirstname").value.trim();
+  const lastName   = document.getElementById("signLastname").value.trim();
+  const email      = document.getElementById("signupEmail").value.trim();
+  const mobile     = document.getElementById("signupMobile").value.trim();
+  const age        = document.getElementById("signupAge").value.trim();
+  const profession = document.getElementById("signupProfession").value;
+  const password   = document.getElementById("signupPassword").value;
+  const confirmPassword = document.getElementById("signupConfirmPassword").value;
+  const submitBtn  = document.getElementById("signupSubmitBtn");
 
-// Check profession was selected
-if (!profession) {
-  showMessage("Please select your profession.", "red");
-  return;
-}
+  // Validate first name
+  if (!firstName) {
+    showMessage("Please enter your first name.", "error");
+    return;
+  }
+
+  // Check passwords match
+  if (password !== confirmPassword) {
+    showMessage("Passwords do not match! Please re-enter.", "error"); // ✅ fixed: was "red"
+    return;
+  }
+
+  // Check profession was selected
+  if (!profession) {
+    showMessage("Please select your profession.", "error"); // ✅ fixed: was "red"
+    return;
+  }
 
   submitBtn.disabled = true;
   submitBtn.textContent = "Creating account...";
 
   const { data, error } = await supabaseClient.auth.signUp({
-  email: email,
-  password: password,
-  options: {
-    data: {
-      first_name: firstName,
-      last_name: lastName,
-      mobile_number: mobile,
-      age: parseInt(age),
-      profession: profession
+    email: email,
+    password: password,
+    options: {
+      data: {
+        first_name: firstName,
+        last_name: lastName,
+        full_name: firstName + " " + lastName, // ✅ added: used by dashboard & email template
+        mobile_number: mobile,
+        age: parseInt(age),
+        profession: profession
+      }
     }
-  }
-});
+  });
 
   submitBtn.disabled = false;
   submitBtn.textContent = "Create Account";
 
   if (error) {
-    showMessage(error.message, "error");
+    // ✅ Show human-readable error message (not raw object)
+    showMessage(error.message || "Signup failed. Please try again.", "error");
     return;
   }
 
-  showMessage(
-    "Account created! Please check your email (" + email + ") to confirm your signup, then log in.",
-    "success"
-  );
+  // Check if email confirmation is required
+  if (data.user && !data.session) {
+    showMessage(
+      "🎉 Account created! A welcome email has been sent to " + email + " — please confirm it to log in.",
+      "success"
+    );
+  } else {
+    showMessage("Account created! Redirecting...", "success");
+    setTimeout(redirectAfterLogin, 1000);
+  }
+
   signupForm.reset();
 });
 
@@ -105,8 +121,8 @@ loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMessage();
 
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
+  const email     = document.getElementById("loginEmail").value.trim();
+  const password  = document.getElementById("loginPassword").value;
   const submitBtn = document.getElementById("loginSubmitBtn");
 
   submitBtn.disabled = true;
@@ -121,11 +137,11 @@ loginForm.addEventListener("submit", async (e) => {
   submitBtn.textContent = "Login";
 
   if (error) {
-    showMessage(error.message, "error");
+    showMessage(error.message || "Login failed. Please check your email and password.", "error");
     return;
   }
 
-  showMessage("Login successful! Redirecting...", "success");
+  showMessage("✅ Login successful! Redirecting...", "success");
   setTimeout(redirectAfterLogin, 800);
 });
 
